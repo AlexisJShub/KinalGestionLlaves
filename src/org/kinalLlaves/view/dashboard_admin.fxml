@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.DashboardAdminController" styleClass="page-root,stitch-root,stitch-role-admin">
+ <left>
+  <VBox spacing="4" prefWidth="218" styleClass="stitch-sidebar">
+   <HBox alignment="CENTER_LEFT" spacing="11" styleClass="stitch-brand-block"><Label text="K" styleClass="stitch-brand-icon"/><VBox spacing="2"><Label text="KinalLlaves" styleClass="stitch-brand-title"/><Label text="Control de espacios" styleClass="stitch-brand-caption"/></VBox></HBox>
+   <Label text="ADMINISTRACIÓN" styleClass="stitch-nav-label"/>
+   <VBox spacing="2" VBox.vgrow="ALWAYS">
+    <Button text="Inicio" onAction="#actualizar" maxWidth="Infinity" styleClass="stitch-nav-current"/>
+<Button text="Usuarios" onAction="#usuarios" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Empleados" onAction="#empleados" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Salones" onAction="#salones" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Llaves" onAction="#llaves" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Estado de llaves" onAction="#estados" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Prestar / devolver" onAction="#entregas" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Reservas" onAction="#reservas" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Incidencias" onAction="#incidencias" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Auditoría" onAction="#auditoria" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+<Button text="Reportes" onAction="#reportes" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+   </VBox><Separator styleClass="sidebar-rule"/>
+   <Button text="Cambiar contraseña" onAction="#cambiarClave" maxWidth="Infinity" styleClass="stitch-nav-item"/>
+   <Button text="Cerrar sesión" onAction="#cerrarSesion" maxWidth="Infinity" styleClass="stitch-logout"/>
+   <Label text="KINAL  ·  SECRETARÍA" styleClass="stitch-sidebar-footer"/>
+  </VBox>
+ </left>
+ <top>
+  <HBox alignment="CENTER_LEFT" spacing="12" styleClass="stitch-topbar">
+   <VBox spacing="5"><Label text="Panel administrativo" styleClass="stitch-top-title"/><Label text="Control de usuarios, salones y llaves." styleClass="stitch-top-caption"/></VBox>
+   <Region HBox.hgrow="ALWAYS"/>
+   <VBox alignment="CENTER_RIGHT" spacing="4"><Label fx:id="lblUsuario" text="Usuario" styleClass="stitch-user-name"/><Label fx:id="lblRol" text="ROL" styleClass="stitch-user-role"/></VBox>
+  </HBox>
+ </top>
+ <center>
+  <VBox spacing="9" styleClass="stitch-workspace,stitch-workspace-flat" VBox.vgrow="ALWAYS">
+    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="stitch-hero">
+     <VBox spacing="10" HBox.hgrow="ALWAYS"><Label text="CONTROL GENERAL" styleClass="stitch-hero-eyebrow"/><Label text="Panel administrativo" styleClass="stitch-hero-title"/><Label text="Administra los espacios y revisa los movimientos del día." wrapText="true" styleClass="stitch-hero-caption"/></VBox>
+     <VBox spacing="9" minWidth="208" prefWidth="255" styleClass="stitch-actions-box"><Label text="ACCESOS RÁPIDOS" styleClass="stitch-actions-label"/><Button text="Administrar usuarios   ›" onAction="#usuarios" maxWidth="Infinity" styleClass="stitch-quick-btn"/>
+<Button text="Ver estado de llaves   ›" onAction="#estados" maxWidth="Infinity" styleClass="stitch-quick-btn"/>
+<Button text="Registrar préstamo   ›" onAction="#entregas" maxWidth="Infinity" styleClass="stitch-quick-btn"/></VBox>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" spacing="10"><VBox spacing="3"><Label text="Resumen de hoy" styleClass="stitch-section-title"/><Label text="Datos actuales del sistema" styleClass="stitch-section-caption"/></VBox><Region HBox.hgrow="ALWAYS"/><Button text="Actualizar" onAction="#actualizar" styleClass="stitch-refresh"/></HBox>
+    <GridPane hgap="10" vgap="9" styleClass="stitch-metrics-grid"><columnConstraints><ColumnConstraints percentWidth="33.3333" hgrow="ALWAYS" fillWidth="true"/><ColumnConstraints percentWidth="33.3333" hgrow="ALWAYS" fillWidth="true"/><ColumnConstraints percentWidth="33.3333" hgrow="ALWAYS" fillWidth="true"/></columnConstraints><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-blue" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity">
+         <Label text="Empleados" styleClass="stitch-stat-name"/><Label fx:id="kEmpleados" text="—" styleClass="stitch-stat-value"/><Label text="Personal registrado" styleClass="stitch-stat-caption"/>
+       </VBox><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-sky" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity">
+         <Label text="Salones" styleClass="stitch-stat-name"/><Label fx:id="kSalones" text="—" styleClass="stitch-stat-value"/><Label text="Espacios activos" styleClass="stitch-stat-caption"/>
+       </VBox><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-green" GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity">
+         <Label text="Disponibles" styleClass="stitch-stat-name"/><Label fx:id="kDisponibles" text="—" styleClass="stitch-stat-value"/><Label text="Llaves para prestar" styleClass="stitch-stat-caption"/>
+       </VBox><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-amber" GridPane.columnIndex="0" GridPane.rowIndex="1" maxWidth="Infinity">
+         <Label text="Prestadas" styleClass="stitch-stat-name"/><Label fx:id="kEntregadas" text="—" styleClass="stitch-stat-value"/><Label text="Sin devolver" styleClass="stitch-stat-caption"/>
+       </VBox><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-purple" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity">
+         <Label text="Reservas" styleClass="stitch-stat-name"/><Label fx:id="kReservas" text="—" styleClass="stitch-stat-value"/><Label text="Próximas reservas" styleClass="stitch-stat-caption"/>
+       </VBox><VBox spacing="3" minWidth="0" prefWidth="-1" styleClass="stitch-stat-card,stitch-stat-red" GridPane.columnIndex="2" GridPane.rowIndex="1" maxWidth="Infinity">
+         <Label text="Incidencias" styleClass="stitch-stat-name"/><Label fx:id="kIncidencias" text="—" styleClass="stitch-stat-value"/><Label text="Por revisar" styleClass="stitch-stat-caption"/>
+       </VBox>
+    </GridPane><HBox alignment="TOP_LEFT" spacing="10" VBox.vgrow="ALWAYS">
+     <VBox spacing="6" minWidth="180" prefWidth="300" HBox.hgrow="ALWAYS" styleClass="stitch-data-card" maxWidth="Infinity">
+      <HBox alignment="CENTER_LEFT"><VBox spacing="4"><Label text="Disponibilidad de llaves" styleClass="stitch-card-title"/><Label text="Información de los salones" styleClass="stitch-section-caption"/></VBox><Region HBox.hgrow="ALWAYS"/><Button text="Ver todas" onAction="#estados" styleClass="stitch-inline-btn"/></HBox>
+      <TableView fx:id="tablaDisponibilidad" prefHeight="180" VBox.vgrow="ALWAYS" minHeight="90"/>
+     </VBox>
+     <VBox spacing="6" minWidth="180" prefWidth="300" HBox.hgrow="ALWAYS" styleClass="stitch-data-card" maxWidth="Infinity">
+      <HBox alignment="CENTER_LEFT"><VBox spacing="4"><Label text="Préstamos sin devolver" styleClass="stitch-card-title"/><Label text="Movimientos del día" styleClass="stitch-section-caption"/></VBox><Region HBox.hgrow="ALWAYS"/><Button text="Gestionar" onAction="#entregas" styleClass="stitch-inline-btn"/></HBox>
+      <TableView fx:id="tablaPendientes" prefHeight="180" VBox.vgrow="ALWAYS" minHeight="90"/>
+     </VBox>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" spacing="7" styleClass="stitch-status-bar"><Label text="●" styleClass="stitch-status-dot"/><Label fx:id="lblMensaje" text="Cargando información..." styleClass="stitch-status-message"/></HBox>
+   </VBox>
+  </center>
+</BorderPane>
