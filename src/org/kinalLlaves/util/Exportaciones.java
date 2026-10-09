@@ -101,4 +101,25 @@ public final class Exportaciones {
             StringBuilder content = new StringBuilder("BT /F1 9 Tf 38 802 Td 13 TL ");
             for (String line : pages.get(p)) {
                 content.append("(").append(pdfEscape(line.length() > 118 ? line.substring(0, 118) : line)).append(") Tj T* ");
+            }
+            content.append("ET");
+            byte[] stream = content.toString().getBytes(StandardCharsets.ISO_8859_1);
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            buf.write(("<< /Length " + stream.length + " >>\nstream\n").getBytes(StandardCharsets.ISO_8859_1));
+            buf.write(stream);
+            buf.write("\nendstream".getBytes(StandardCharsets.ISO_8859_1));
+            object.add(buf.toByteArray());
+        }
+        object.add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".getBytes(StandardCharsets.ISO_8859_1));
+        try (OutputStream out = Files.newOutputStream(archivo)) {
+            out.write("%PDF-1.4\n".getBytes(StandardCharsets.ISO_8859_1));
+            List<Integer> offsets = new ArrayList<>();
+            offsets.add(0);
+            int length = 9;
+            for (int i = 1; i < object.size(); i++) {
+                offsets.add(length);
+                byte[] obj = (i + " 0 obj\n").getBytes(StandardCharsets.ISO_8859_1);
+                out.write(obj);
+                length += obj.length;
+                out.write(object.get(i));
          
