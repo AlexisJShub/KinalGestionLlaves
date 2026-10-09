@@ -2,35 +2,53 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.LoginController" styleClass="login-root">
-  <left>
-    <VBox prefWidth="515" spacing="21" styleClass="login-showcase" alignment="CENTER_LEFT">
-      <Label text="KINAL / LLAVES" styleClass="login-brand-white"/>
-      <Label text="CONTROL DE LLAVES" styleClass="login-eyebrow"/>
-      <Label text="Control de llaves de Kinal" styleClass="login-big-title" wrapText="true"/>
-      <Label text="Consulta, presta y recibe llaves de los salones." wrapText="true" styleClass="login-lead"/>
-      <Separator styleClass="showcase-separator"/>
-      <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature"><Label text="01" styleClass="feature-number"/><VBox spacing="3"><Label text="Control de acceso" styleClass="feature-title"/><Label text="Cada usuario tiene sus opciones." wrapText="true" styleClass="feature-copy"/></VBox></HBox>
-      <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature"><Label text="02" styleClass="feature-number"/><VBox spacing="3"><Label text="Estado de llaves" styleClass="feature-title"/><Label text="Mira cuáles están libres o prestadas." wrapText="true" styleClass="feature-copy"/></VBox></HBox>
-      <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature"><Label text="03" styleClass="feature-number"/><VBox spacing="3"><Label text="Historial" styleClass="feature-title"/><Label text="Consulta los movimientos anteriores." wrapText="true" styleClass="feature-copy"/></VBox></HBox>
-      <Region VBox.vgrow="ALWAYS"/>
-      <Label text="Sistema de Gestión de Llaves · Espacios de Aprendizaje" wrapText="true" styleClass="login-caption-white"/>
-    </VBox>
-  </left>
-  <center>
-    <StackPane styleClass="login-form-wrapper">
-      <VBox spacing="16" maxWidth="415" styleClass="login-card">
-        <Label text="INICIAR SESIÓN" styleClass="eyebrow-blue"/>
-        <Label text="Bienvenido a KinalLlaves" styleClass="login-form-title"/>
-        <Label text="Ingresa tu usuario y contraseña." wrapText="true" styleClass="subtitle"/>
-        <Separator/>
-        <Label text="NOMBRE DE USUARIO" styleClass="input-label"/>
-        <TextField fx:id="username" promptText="Escribe tu usuario" onAction="#ingresar" styleClass="form-field"/>
-        <Label text="CONTRASEÑA" styleClass="input-label"/>
-        <PasswordField fx:id="clave" promptText="Escribe tu contraseña" onAction="#ingresar" styleClass="form-field"/>
-        <Button text="Iniciar sesión   →" onAction="#ingresar" maxWidth="Infinity" styleClass="primary-btn, login-submit"/>
-        <Button fx:id="btnInicial" text="Crear administrador (solo primera vez)" onAction="#configurar" maxWidth="Infinity" styleClass="outline-btn"/>
-        <Label fx:id="estado" wrapText="true" styleClass="login-status"/>
-      </VBox>
-    </StackPane>
-  </center>
+    <left>
+        <VBox prefWidth="515" spacing="21" styleClass="login-showcase" alignment="CENTER_LEFT">
+            <Label text="KINAL / LLAVES" styleClass="login-brand-white"/>
+            <Label text="CONTROL DE LLAVES" styleClass="login-eyebrow"/>
+            <Label text="Control de llaves de Kinal" styleClass="login-big-title" wrapText="true"/>
+            <Label text="Consulta, presta y recibe llaves de los salones." wrapText="true" styleClass="login-lead"/>
+            <Separator styleClass="showcase-separator"/>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature">
+                <Label text="01" styleClass="feature-number"/>
+                <VBox spacing="3">
+                    <Label text="Control de acceso" styleClass="feature-title"/>
+                    <Label text="Cada usuario tiene sus opciones." wrapText="true" styleClass="feature-copy"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature">
+                <Label text="02" styleClass="feature-number"/>
+                <VBox spacing="3">
+                    <Label text="Estado de llaves" styleClass="feature-title"/>
+                    <Label text="Mira cuáles están libres o prestadas." wrapText="true" styleClass="feature-copy"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="14" alignment="CENTER_LEFT" styleClass="showcase-feature">
+                <Label text="03" styleClass="feature-number"/>
+                <VBox spacing="3">
+                    <Label text="Historial" styleClass="feature-title"/>
+                    <Label text="Consulta los movimientos anteriores." wrapText="true" styleClass="feature-copy"/>
+                </VBox>
+            </HBox>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label text="Sistema de Gestión de Llaves · Espacios de Aprendizaje" wrapText="true" styleClass="login-caption-white"/>
+        </VBox>
+    </left>
+    <center>
+        <StackPane styleClass="login-form-wrapper">
+            <VBox spacing="16" maxWidth="415" styleClass="login-card">
+                <Label text="INICIAR SESIÓN" styleClass="eyebrow-blue"/>
+                <Label text="Bienvenido a KinalLlaves" styleClass="login-form-title"/>
+                <Label text="Ingresa tu usuario y contraseña." wrapText="true" styleClass="subtitle"/>
+                <Separator/>
+                <Label text="NOMBRE DE USUARIO" styleClass="input-label"/>
+                <TextField fx:id="username" promptText="Escribe tu usuario" onAction="#ingresar" styleClass="form-field"/>
+                <Label text="CONTRASEÑA" styleClass="input-label"/>
+                <PasswordField fx:id="clave" promptText="Escribe tu contraseña" onAction="#ingresar" styleClass="form-field"/>
+                <Button text="Iniciar sesión   →" onAction="#ingresar" maxWidth="Infinity" styleClass="primary-btn, login-submit"/>
+                <Button fx:id="btnInicial" text="Crear administrador (solo primera vez)" onAction="#configurar" maxWidth="Infinity" styleClass="outline-btn"/>
+                <Label fx:id="estado" wrapText="true" styleClass="login-status"/>
+            </VBox>
+        </StackPane>
+    </center>
 </BorderPane>

@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.CambiarClaveController" styleClass="page-root">
- <top><HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar"><Label text="Cambiar contraseña" styleClass="screen-title, module-title"/><Region HBox.hgrow="ALWAYS"/><Button text="Inicio" onAction="#volver" styleClass="outline-btn"/></HBox></top>
- <center><VBox alignment="CENTER" spacing="14" maxWidth="480" styleClass="login-card"><Label text="Cambia tu contraseña aquí." styleClass="section-title"/>
-  <PasswordField fx:id="anterior" promptText="Contraseña actual"/><PasswordField fx:id="nueva" promptText="Contraseña nueva (mínimo 8 caracteres)"/><PasswordField fx:id="repetir" promptText="Confirmar nueva contraseña"/>
-  <Button text="Guardar contraseña" onAction="#guardar" maxWidth="Infinity" styleClass="primary-btn"/>
- </VBox></center>
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar">
+            <Label text="Cambiar contraseña" styleClass="screen-title, module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="14" maxWidth="480" styleClass="login-card">
+            <Label text="Cambia tu contraseña aquí." styleClass="section-title"/>
+            <PasswordField fx:id="anterior" promptText="Contraseña actual"/>
+            <PasswordField fx:id="nueva" promptText="Contraseña nueva (mínimo 8 caracteres)"/>
+            <PasswordField fx:id="repetir" promptText="Confirmar nueva contraseña"/>
+            <Button text="Guardar contraseña" onAction="#guardar" maxWidth="Infinity" styleClass="primary-btn"/>
+        </VBox>
+    </center>
 </BorderPane>
