@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package org.kinalLlaves.model;
+package org.kinalllaves.model;
 
-/**
- *
- * @author estra
- */
-public class Llave {
-    
+public record Llave(long id, String codigo, long salonId, String estado, boolean activo) {
+
 }
+
