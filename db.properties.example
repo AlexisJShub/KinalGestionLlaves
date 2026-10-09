@@ -1,5 +1,0 @@
-# Copia este archivo como db.properties, en la carpeta del proyecto.
-# Configura tu propio usuario y esquema MySQL; no guardes este archivo en Git.
-db.url=jdbc:mysql://localhost:3306/dbkinalllaves?useSSL=false&serverTimezone=America/Guatemala&connectTimeout=5000&socketTimeout=10000
-db.user=TU_USUARIO_MYSQL
-db.password=TU_CLAVE_PRIVADA
