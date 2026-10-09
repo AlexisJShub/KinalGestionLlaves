@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.OperacionesController" styleClass="page-root,stitch-root">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="stitch-topbar">
+            <Label text="Préstamos y devoluciones" styleClass="screen-title,module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Volver" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="9" styleClass="page-content,module-content" VBox.vgrow="ALWAYS">
+            <Label text="Lee el carné, revisa los datos y confirma. No necesitas escribir el nombre del profesor." styleClass="module-summary" wrapText="true"/>
+            <TabPane fx:id="pestanas" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                <tabs>
+                    <Tab text="Prestar llave">
+                        <content>
+                            <StackPane styleClass="scan-surface" maxHeight="Infinity" minHeight="0">
+                                <children>
+                                    <VBox fx:id="prestamoInicio" alignment="CENTER" spacing="17" styleClass="scan-card">
+                                        <Label text="1" styleClass="scan-step"/>
+                                        <Label text="Solicitar una llave" styleClass="scan-title"/>
+                                        <Label text="Para comenzar, identifica al profesor con su carné." styleClass="scan-subtitle" wrapText="true"/>
+                                        <Button text="Leer carné para prestar" onAction="#iniciarPrestamo" styleClass="primary-btn,scan-main-button"/>
+                                    </VBox>
+                                    <VBox fx:id="prestamoEspera" visible="false" managed="false" alignment="CENTER" spacing="15" styleClass="scan-card">
+                                        <Label text="▣" styleClass="scan-symbol"/>
+                                        <Label text="Coloca tu carné" styleClass="scan-title"/>
+                                        <Label text="Pásalo por el lector o escribe el número y presiona Enter." styleClass="scan-subtitle" wrapText="true"/>
+                                        <TextField fx:id="carnetPrestamo" promptText="Esperando carné..." onAction="#identificarCarnetPrestamo" maxWidth="360" styleClass="scan-input"/>
+                                        <Button text="Buscar carné" onAction="#identificarCarnetPrestamo" styleClass="primary-btn"/>
+                                        <Label fx:id="estadoPrestamoEspera" wrapText="true" styleClass="inline-status"/>
+                                    </VBox>
+                                    <VBox fx:id="prestamoResumen" visible="false" managed="false" spacing="13" styleClass="scan-card,scan-card-detail">
+                                        <HBox spacing="12" alignment="CENTER_LEFT">
+                                            <VBox spacing="3">
+                                                <Label text="Profesor identificado" styleClass="scan-eyebrow"/>
+                                                <Label text="Revisa los datos antes de confirmar" styleClass="scan-title-small"/>
+                                            </VBox>
+                                            <Region HBox.hgrow="ALWAYS"/>
+                                            <Button text="Cambiar carné" onAction="#iniciarPrestamo" styleClass="outline-btn"/>
+                                        </HBox>
+                                        <GridPane hgap="16" vgap="8" styleClass="scan-person-card">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="50"/>
+                                                <ColumnConstraints percentWidth="50"/>
+                                            </columnConstraints>
+                                            <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" spacing="3">
+                                                <Label text="Nombres" styleClass="scan-field-label"/>
+                                                <Label fx:id="nombrePrestamo" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="3">
+                                                <Label text="Apellidos" styleClass="scan-field-label"/>
+                                                <Label fx:id="apellidosPrestamo" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="3">
+                                                <Label text="Carné" styleClass="scan-field-label"/>
+                                                <Label fx:id="carnetPrestamoDato" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="3">
+                                                <Label text="CUI" styleClass="scan-field-label"/>
+                                                <Label fx:id="cuiPrestamo" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" spacing="3">
+                                                <Label text="Cargo" styleClass="scan-field-label"/>
+                                                <Label fx:id="puestoPrestamo" styleClass="scan-field-value"/>
+                                            </VBox>
+                                        </GridPane>
+                                        <HBox alignment="CENTER_LEFT" spacing="12">
+                                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                                <Label text="Llave que llevará" styleClass="input-label"/>
+                                                <ComboBox fx:id="llave" promptText="Selecciona una llave disponible" maxWidth="Infinity"/>
+                                            </VBox>
+                                        </HBox>
+                                        <TitledPane text="Documento que deja (opcional)" expanded="false" animated="false">
+                                            <content>
+                                                <TextField fx:id="documento" promptText="Documento entregado en Secretaría"/>
+                                            </content>
+                                        </TitledPane>
+                                        <Label fx:id="estadoPrestamo" wrapText="true" styleClass="inline-status"/>
+                                        <Button fx:id="btnConfirmarPrestamo" text="Confirmar préstamo" onAction="#confirmarPrestamo" styleClass="primary-btn,scan-confirm"/>
+                                    </VBox>
+                                </children>
+                            </StackPane>
+                        </content>
+                    </Tab>
+                    <Tab fx:id="pestanaDevolver" text="Devolver llave">
+                        <content>
+                            <StackPane styleClass="scan-surface" maxHeight="Infinity" minHeight="0">
+                                <children>
+                                    <VBox fx:id="devolucionInicio" alignment="CENTER" spacing="17" styleClass="scan-card">
+                                        <Label text="2" styleClass="scan-step"/>
+                                        <Label text="Devolver una llave" styleClass="scan-title"/>
+                                        <Label text="Lee el carné de quien retiró la llave para encontrar su préstamo." styleClass="scan-subtitle" wrapText="true"/>
+                                        <Button text="Leer carné para devolver" onAction="#iniciarDevolucion" styleClass="primary-btn,scan-main-button"/>
+                                    </VBox>
+                                    <VBox fx:id="devolucionEspera" visible="false" managed="false" alignment="CENTER" spacing="13" styleClass="scan-card">
+                                        <Label text="▣" styleClass="scan-symbol"/>
+                                        <Label text="Coloca tu carné" styleClass="scan-title"/>
+                                        <Label text="Pásalo por el lector o escribe el número y presiona Enter." styleClass="scan-subtitle" wrapText="true"/>
+                                        <TextField fx:id="carnetDevolucion" promptText="Esperando carné..." onAction="#identificarCarnetDevolucion" maxWidth="360" styleClass="scan-input"/>
+                                        <Button text="Buscar préstamo" onAction="#identificarCarnetDevolucion" styleClass="primary-btn"/>
+                                        <VBox fx:id="bloqueTitular" spacing="7" alignment="CENTER" maxWidth="420">
+                                            <Label text="¿Devuelves una llave prestada a otra persona?" wrapText="true" styleClass="scan-subtitle"/>
+                                            <TextField fx:id="carnetTitular" promptText="Carné de quien recibió la llave" onAction="#identificarTitular"/>
+                                            <Button text="Buscar préstamo del titular" onAction="#identificarTitular" styleClass="outline-btn"/>
+                                        </VBox>
+                                        <Label fx:id="estadoDevolucionEspera" wrapText="true" styleClass="inline-status"/>
+                                    </VBox>
+                                    <VBox fx:id="devolucionResumen" visible="false" managed="false" spacing="12" styleClass="scan-card,scan-card-detail">
+                                        <HBox spacing="12" alignment="CENTER_LEFT">
+                                            <VBox spacing="3">
+                                                <Label text="Préstamo encontrado" styleClass="scan-eyebrow"/>
+                                                <Label text="Confirma los datos de la devolución" styleClass="scan-title-small"/>
+                                            </VBox>
+                                            <Region HBox.hgrow="ALWAYS"/>
+                                            <Button text="Otro carné" onAction="#iniciarDevolucion" styleClass="outline-btn"/>
+                                        </HBox>
+                                        <GridPane hgap="16" vgap="7" styleClass="scan-person-card">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="50"/>
+                                                <ColumnConstraints percentWidth="50"/>
+                                            </columnConstraints>
+                                            <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" spacing="3">
+                                                <Label text="Nombres" styleClass="scan-field-label"/>
+                                                <Label fx:id="nombreDevolucion" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="3">
+                                                <Label text="Apellidos" styleClass="scan-field-label"/>
+                                                <Label fx:id="apellidosDevolucion" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="3">
+                                                <Label text="Carné" styleClass="scan-field-label"/>
+                                                <Label fx:id="carnetDevolucionDato" styleClass="scan-field-value"/>
+                                            </VBox>
+                                            <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="3">
+                                                <Label text="CUI" styleClass="scan-field-label"/>
+                                                <Label fx:id="cuiDevolucion" styleClass="scan-field-value"/>
+                                            </VBox>
+                                        </GridPane>
+                                        <VBox spacing="4">
+                                            <Label text="Préstamo pendiente" styleClass="input-label"/>
+                                            <ComboBox fx:id="entrega" promptText="Selecciona el préstamo" maxWidth="Infinity"/>
+                                        </VBox>
+                                        <Label fx:id="datosPrestamoActivo" wrapText="true" styleClass="loan-detail"/>
+                                        <HBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Quién devuelve:" styleClass="scan-field-label"/>
+                                            <Label fx:id="quienDevuelve" styleClass="scan-field-value"/>
+                                        </HBox>
+                                        <TitledPane text="Si devuelve otra persona, lee su carné" expanded="false" animated="false">
+                                            <content>
+                                                <HBox spacing="8">
+                                                    <TextField fx:id="carnetOtraPersona" promptText="Carné de quien devuelve" onAction="#identificarQuienDevuelve" HBox.hgrow="ALWAYS"/>
+                                                    <Button text="Verificar carné" onAction="#identificarQuienDevuelve" styleClass="outline-btn"/>
+                                                </HBox>
+                                            </content>
+                                        </TitledPane>
+                                        <CheckBox fx:id="documentoRetirado" text="Se devolvió el documento"/>
+                                        <TitledPane text="Comentario (opcional)" expanded="false" animated="false">
+                                            <content>
+                                                <TextArea fx:id="observacion" prefRowCount="2" wrapText="true" promptText="Escribe alguna observación"/>
+                                            </content>
+                                        </TitledPane>
+                                        <Label fx:id="estadoDevolucion" wrapText="true" styleClass="inline-status"/>
+                                        <Button fx:id="btnConfirmarDevolucion" text="Confirmar devolución" onAction="#confirmarDevolucion" styleClass="primary-btn,scan-confirm"/>
+                                    </VBox>
+                                </children>
+                            </StackPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Historial">
+                        <content>
+                            <VBox spacing="10" styleClass="page-content,compact-history">
+                                <HBox alignment="CENTER_LEFT" spacing="12">
+                                    <Label text="Historial de préstamos" styleClass="section-title"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <TextField fx:id="filtro" promptText="Buscar profesor, llave o carné" onAction="#recargar" prefWidth="240"/>
+                                    <Button text="Actualizar" onAction="#recargar" styleClass="outline-btn"/>
+                                </HBox>
+                                <TableView fx:id="tabla" minHeight="120" styleClass="data-table" VBox.vgrow="ALWAYS"/>
+                            </VBox>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>
