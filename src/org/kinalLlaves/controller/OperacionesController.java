@@ -28,9 +28,6 @@ import org.kinalllaves.system.Main;
 import org.kinalllaves.util.Comprobantes;
 import org.kinalllaves.util.Permisos;
 
-/**
- * Préstamos y devoluciones guiados por la lectura del carné del empleado.
- */
 public class OperacionesController {
 
     @FXML
