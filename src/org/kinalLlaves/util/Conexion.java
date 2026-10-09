@@ -5,7 +5,6 @@ import java.nio.file.*;
 import java.sql.*;
 import java.util.*;
 
-
 public final class Conexion {
 
     private static Conexion instancia;
@@ -26,5 +25,31 @@ public final class Conexion {
         url = requerir(p, "db.url");
         user = requerir(p, "db.user");
         password = requerir(p, "db.password");
-    
+
+    }
+
+    private static String requerir(Properties p, String k) {
+        String v = p.getProperty(k);
+        if (v == null || v.isBlank()) {
+            throw new IllegalStateException("Falta " + k + " en db.properties");
+        }
+        return v;
+    }
+
+    public static synchronized Conexion getInstancia() {
+        if (instancia == null) {
+            instancia = new Conexion();
+        }
+        return instancia;
+    }
+
+    public Connection conectar() throws SQLException {
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    public boolean verificar() throws SQLException {
+        try (Connection c = conectar()) {
+            return c.isValid(3);
+        }
+    }
 }
