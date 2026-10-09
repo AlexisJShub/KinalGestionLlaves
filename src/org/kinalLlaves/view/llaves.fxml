@@ -1,0 +1,21 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.LlavesController" styleClass="page-root">
+  <top><HBox alignment="CENTER_LEFT" spacing="18" styleClass="topbar, module-topbar">
+    <VBox spacing="3"><Label text="Llaves" styleClass="screen-title, module-title"/><Label text="Agrega y edita llaves." styleClass="hint"/></VBox>
+    <Region HBox.hgrow="ALWAYS"/><Button text="Volver" onAction="#volver" styleClass="outline-btn"/>
+  </HBox></top>
+  <center><VBox spacing="14" styleClass="page-content, module-content">
+    <HBox spacing="14" alignment="CENTER_LEFT" styleClass="panel, module-panel"><VBox spacing="5" HBox.hgrow="ALWAYS"><Label text="Buscar llave" styleClass="section-title"/><Label fx:id="lblAyuda" text="Elige una llave para editarla." styleClass="hint" wrapText="true"/></VBox><TextField fx:id="buscar" prefWidth="290" promptText="Nombre, código o estado" onAction="#buscar"/><Button text="Buscar" onAction="#buscar" styleClass="outline-btn"/><Button text="Actualizar" onAction="#buscar" styleClass="outline-btn"/></HBox>
+    <SplitPane dividerPositions="0.55" VBox.vgrow="ALWAYS" styleClass="workspace-split" minHeight="0"><items>
+      <VBox spacing="7" styleClass="panel, module-panel,compact-form" minWidth="260"><HBox spacing="8" alignment="CENTER_LEFT"><Label text="Lista de llaves" styleClass="section-title"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblEstadoLista" text="Cargando..." styleClass="hint"/></HBox><TableView styleClass="data-table" fx:id="tabla" VBox.vgrow="ALWAYS"/></VBox>
+      <VBox spacing="6" styleClass="panel, module-panel,compact-form" minWidth="260"><Label text="Datos de la llave" styleClass="section-title"/><Label text="Llena los datos de la llave." styleClass="hint" wrapText="true"/><GridPane fx:id="formulario" hgap="9" vgap="5"/><Separator/><HBox spacing="7" alignment="CENTER_LEFT" styleClass="form-actions-bar"><Button fx:id="btnGuardar" text="Guardar" onAction="#guardar" styleClass="primary-btn" minWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/><Button text="Nueva llave" onAction="#limpiar" styleClass="outline-btn" minWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/><Button fx:id="btnDesactivar" text="Desactivar llave" onAction="#desactivar" styleClass="danger-btn" minWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/></HBox></VBox></items></SplitPane>
+  </VBox></center>
+  <bottom><HBox spacing="13" alignment="CENTER_LEFT" styleClass="topbar, module-topbar">
+   <VBox spacing="3"><Label text="Cambiar estado de llave" styleClass="section-title"/>
+    <Label text="Elige una llave sin préstamo activo." styleClass="hint"/></VBox>
+   <Region HBox.hgrow="ALWAYS"/>
+   <ComboBox fx:id="nuevoEstado" prefWidth="180"/>
+   <Button text="Cambiar estado" onAction="#cambiarEstado" styleClass="outline-btn"/>
+  </HBox></bottom>
+</BorderPane>
