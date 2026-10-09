@@ -1,0 +1,256 @@
+/* KinalLlaves · diseño institucional, JavaFX 21. Sin bibliotecas gráficas externas. */
+.root { -fx-font-family: "Segoe UI", "Arial", sans-serif; -fx-font-size: 13px; -fx-background-color: #f3f6fb; }
+.label { -fx-text-fill: #203451; }
+.page-root { -fx-background-color: #f3f6fb; }
+.topbar { -fx-background-color: #ffffff; -fx-padding: 17 28; -fx-border-color: #e3eaf3; -fx-border-width: 0 0 1 0; -fx-min-height: 84; }
+.screen-title { -fx-font-size: 20px; -fx-font-weight: 800; -fx-text-fill: #142d4c; }
+.section-title { -fx-font-size: 16px; -fx-font-weight: 800; -fx-text-fill: #1b3456; }
+.subtitle { -fx-font-size: 14px; -fx-text-fill: #6b7e96; }
+.hint { -fx-font-size: 12px; -fx-text-fill: #728299; }
+.footnote { -fx-font-size: 11px; -fx-text-fill: #92a0b2; }
+.user-name { -fx-font-weight: bold; -fx-text-fill: #183252; }
+.role-tag { -fx-text-fill: #1965a5; -fx-background-color: #e8f3ff; -fx-background-radius: 30; -fx-padding: 4 12; -fx-font-size: 10px; -fx-font-weight: 900; }
+.sidebar { -fx-background-color: #132b49; -fx-padding: 23 14 16 14; }
+.sidebar-brand { -fx-padding: 4 12 25 12; }
+.brand-white { -fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 22px; }
+.sidebar-sub, .sidebar-heading, .sidebar-footer { -fx-text-fill: #8eabca; -fx-font-size: 10px; -fx-font-weight: bold; }
+.sidebar-heading { -fx-padding: 8 12; }
+.sidebar-footer { -fx-padding: 10 12 0 12; }
+.sidebar-scroll, .sidebar-scroll > .viewport { -fx-background-color: transparent; -fx-border-color: transparent; }
+.sidebar-scroll { -fx-background-insets: 0; -fx-padding: 0; }
+.sidebar-link { -fx-background-color: transparent; -fx-text-fill: #cad9e9; -fx-alignment: CENTER_LEFT; -fx-padding: 12 14; -fx-background-radius: 9; -fx-font-size: 12px; -fx-font-weight: bold; -fx-cursor: hand; }
+.sidebar-link:hover { -fx-background-color: #294665; -fx-text-fill: #ffffff; }
+.sidebar-logout { -fx-background-color: #253c58; -fx-text-fill: #ffffff; -fx-alignment: CENTER_LEFT; -fx-padding: 12 14; -fx-background-radius: 9; }
+.sidebar-logout:hover { -fx-background-color: #36506e; }
+.sidebar-rule { -fx-opacity: 0.2; }
+.main-scroll, .main-scroll > .viewport, .transparent-scroll, .transparent-scroll > .viewport { -fx-background-color: transparent; -fx-background-insets: 0; }
+.dashboard-content { -fx-padding: 27 28 32 28; }
+.dashboard-banner { -fx-background-color: linear-gradient(to right, #153961, #0d5687); -fx-background-radius: 16; -fx-padding: 25 28; -fx-min-height: 195; }
+.admin-theme .dashboard-banner { -fx-background-color: linear-gradient(to right, #183c68, #0e5c91); }
+.jefe-theme .dashboard-banner { -fx-background-color: linear-gradient(to right, #17375b, #1c577d); }
+.secretario-theme .dashboard-banner { -fx-background-color: linear-gradient(to right, #174968, #117897); }
+.banner-eyebrow, .quick-heading { -fx-text-fill: #9dd6f8; -fx-font-size: 10px; -fx-font-weight: bold; }
+.banner-title { -fx-text-fill: #ffffff; -fx-font-size: 25px; -fx-font-weight: 900; }
+.banner-copy { -fx-text-fill: #d5e8f6; -fx-font-size: 13px; }
+.quick-action-panel { -fx-background-color: #ffffff19; -fx-background-radius: 12; -fx-padding: 12; }
+.quick-action { -fx-background-color: #ffffff; -fx-text-fill: #17527d; -fx-alignment: CENTER_LEFT; -fx-font-weight: 800; -fx-padding: 9 12; -fx-background-radius: 7; -fx-cursor: hand; }
+.quick-action:hover { -fx-background-color: #d9efff; }
+.metric-card { -fx-background-color: #ffffff; -fx-background-radius: 12; -fx-border-color: #e2eaf4; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 18 18 17 18; -fx-pref-width: 175; -fx-min-height: 118; }
+.metric-label { -fx-text-fill: #647894; -fx-font-size: 12px; -fx-font-weight: bold; }
+.metric-number { -fx-font-size: 30px; -fx-font-weight: 900; -fx-text-fill: #173f6a; }
+.metric-foot { -fx-font-size: 10px; -fx-text-fill: #90a0b1; }
+.accent-green .metric-number { -fx-text-fill: #138060; }
+.accent-blue .metric-number { -fx-text-fill: #1d6fb4; }
+.accent-purple .metric-number { -fx-text-fill: #7850b1; }
+.accent-amber .metric-number { -fx-text-fill: #b47721; }
+.panel { -fx-background-color: #ffffff; -fx-background-radius: 13; -fx-border-radius: 13; -fx-border-color: #e3eaf3; -fx-padding: 19; }
+.table-panel { -fx-padding: 18; }
+.dashboard-footer { -fx-padding: 6 3; }
+.online-dot { -fx-text-fill: #16a36e; }
+.button { -fx-background-radius: 8; -fx-padding: 10 16; -fx-font-weight: 700; -fx-cursor: hand; }
+.primary-btn { -fx-background-color: #1169ac; -fx-text-fill: #ffffff; }
+.primary-btn:hover { -fx-background-color: #0c568f; }
+.outline-btn { -fx-background-color: #eaf2fb; -fx-text-fill: #19547e; }
+.outline-btn:hover { -fx-background-color: #d8e8f7; }
+.text-btn { -fx-background-color: #eff6fd; -fx-text-fill: #1466a8; }
+.text-btn:hover { -fx-background-color: #dcefff; }
+.danger-btn { -fx-background-color: #fee9e9; -fx-text-fill: #a73737; }
+.danger-btn:hover { -fx-background-color: #fbd7d7; }
+.page-content { -fx-padding: 26 28; }
+.module-content { -fx-spacing: 18; }
+.module-panel { -fx-padding: 21; }
+.module-title { -fx-font-size: 20px; }
+.field-label, .input-label { -fx-text-fill: #586d86; -fx-font-size: 11px; -fx-font-weight: 800; }
+.text-field, .password-field, .combo-box, .date-picker, .spinner, .text-area { -fx-background-color: #ffffff; -fx-border-color: #d7e2ef; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 6 8; -fx-prompt-text-fill: #96a5b6; }
+.text-field:focused, .password-field:focused, .text-area:focused { -fx-border-color: #2680c2; -fx-border-width: 1.5; }
+.table-view { -fx-background-color: #ffffff; -fx-border-color: #dce6f1; -fx-border-radius: 9; -fx-background-radius: 9; -fx-padding: 0; }
+.table-view .column-header-background { -fx-background-color: #edf3f9; -fx-background-radius: 8 8 0 0; }
+.table-view .column-header { -fx-background-color: transparent; -fx-border-color: transparent #e3ebf4 transparent transparent; -fx-padding: 12 7; }
+.table-view .column-header .label { -fx-text-fill: #3b5370; -fx-font-size: 11px; -fx-font-weight: 800; }
+.table-row-cell { -fx-background-color: #ffffff; -fx-border-color: transparent transparent #edf1f6 transparent; -fx-cell-size: 39; }
+.table-row-cell:odd { -fx-background-color: #f9fbfe; }
+.table-row-cell:hover { -fx-background-color: #eaf4fd; }
+.table-row-cell:selected { -fx-background-color: #d2eaff; }
+.table-row-cell:selected .text { -fx-fill: #103454; }
+.table-cell { -fx-padding: 7 9; -fx-text-fill: #43546c; }
+.workspace-split { -fx-background-color: transparent; -fx-padding: 0; }
+.workspace-split > .split-pane-divider { -fx-background-color: #edf2f7; -fx-padding: 2; }
+/* Pantalla de acceso */
+.login-root { -fx-background-color: #f5f8fc; }
+.login-showcase { -fx-background-color: linear-gradient(to bottom right, #102a4b, #134970, #0d7092); -fx-padding: 52 49; }
+.login-brand-white { -fx-text-fill: #ffffff; -fx-font-size: 25px; -fx-font-weight: 900; }
+.login-eyebrow { -fx-text-fill: #a6dff8; -fx-font-size: 10px; -fx-font-weight: bold; }
+.login-big-title { -fx-text-fill: #ffffff; -fx-font-size: 34px; -fx-font-weight: 900; }
+.login-lead { -fx-text-fill: #d4e6f4; -fx-font-size: 15px; }
+.login-caption-white { -fx-text-fill: #8bb6d3; -fx-font-size: 11px; }
+.showcase-separator { -fx-opacity: 0.3; }
+.showcase-feature { -fx-padding: 12 0; }
+.feature-number { -fx-text-fill: #5ccee8; -fx-font-size: 22px; -fx-font-weight: bold; }
+.feature-title { -fx-text-fill: #ffffff; -fx-font-weight: 900; -fx-font-size: 13px; }
+.feature-copy { -fx-text-fill: #d0e6f6; -fx-font-size: 12px; }
+.login-form-wrapper { -fx-padding: 30; }
+.login-card { -fx-background-color: #ffffff; -fx-background-radius: 16; -fx-padding: 38 36; -fx-border-color: #e0e8f2; -fx-border-radius: 16; }
+.login-form-title { -fx-font-size: 29px; -fx-font-weight: 900; -fx-text-fill: #153252; }
+.eyebrow-blue { -fx-font-size: 10px; -fx-text-fill: #146fac; -fx-font-weight: bold; }
+.login-submit { -fx-padding: 14 18; -fx-font-size: 14px; }
+.login-status { -fx-font-size: 11px; -fx-text-fill: #6b7e95; }
+.tech-chip { -fx-background-color: #edf3f9; -fx-background-radius: 20; -fx-text-fill: #57708c; -fx-padding: 5 11; -fx-font-size: 10px; }
+
+/* Encabezados de módulos operativos */
+.module-intro { -fx-background-color: #eaf3fc; -fx-background-radius: 10; -fx-border-color: #d8e8f7; -fx-border-radius: 10; -fx-padding: 13 18; }
+.module-eyebrow { -fx-text-fill: #226a9e; -fx-font-size: 10px; -fx-font-weight: 800; }
+.module-summary { -fx-text-fill: #395675; -fx-font-size: 12px; }
+
+/* Pestañas sencillas para prestar y devolver llaves */
+.tab-pane { -fx-background-color: transparent; -fx-tab-min-height: 34; }
+.tab-pane .tab-header-background { -fx-background-color: #edf3f9; }
+.tab-pane .tab { -fx-background-color: #edf3f9; -fx-background-radius: 7 7 0 0; -fx-padding: 7 15; }
+.tab-pane .tab:selected { -fx-background-color: #ffffff; }
+.tab-pane .tab .tab-label { -fx-text-fill: #45607e; -fx-font-weight: bold; }
+.tab-pane .tab:selected .tab-label { -fx-text-fill: #1169ac; }
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator { -fx-border-color: transparent; }
+.titled-pane > .title { -fx-background-color: #eff5fb; -fx-background-radius: 7; }
+.titled-pane > .title > .text { -fx-fill: #415d7b; }
+.titled-pane > *.content { -fx-background-color: #ffffff; -fx-border-color: #d7e2ef; -fx-padding: 10; }
+
+
+/* Adaptación nativa JavaFX de Stitch: panel administrativo, supervisión y operación.
+   Paleta: índigo #1d4ed8, superficies #f8f9ff y azul marino #0b1c30.
+   No requiere WebView ni librerías nuevas. */
+.stitch-root { -fx-background-color: #f8f9ff; -fx-font-family: "Segoe UI", "Inter", sans-serif; }
+.stitch-sidebar { -fx-background-color: #0b1c30; -fx-padding: 22 13 17 13; }
+.stitch-brand-block { -fx-padding: 6 9 24 9; }
+.stitch-brand-icon { -fx-background-color: #1d4ed8; -fx-background-radius: 10; -fx-padding: 8 13; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; }
+.stitch-brand-title { -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px; }
+.stitch-brand-caption { -fx-text-fill: #a3b7d5; -fx-font-size: 11px; }
+.stitch-nav-label { -fx-text-fill: #97a8c0; -fx-padding: 8 11 8 11; -fx-font-size: 10px; -fx-font-weight: bold; }
+.stitch-nav-item { -fx-background-color: transparent; -fx-text-fill: #c6d3e5; -fx-alignment: CENTER_LEFT; -fx-padding: 12 14; -fx-background-radius: 8; -fx-font-size: 12px; -fx-cursor: hand; }
+.stitch-nav-item:hover { -fx-background-color: #203653; -fx-text-fill: white; }
+.stitch-nav-current { -fx-background-color: #1d4ed8; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 12 14; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; }
+.stitch-logout { -fx-background-color: #203653; -fx-text-fill: #e3eaf5; -fx-alignment: CENTER_LEFT; -fx-padding: 11 14; -fx-background-radius: 8; -fx-cursor: hand; }
+.stitch-logout:hover { -fx-background-color: #364862; }
+.stitch-sidebar-footer { -fx-text-fill: #849ab6; -fx-font-size: 10px; -fx-padding: 13 9 0 9; }
+.stitch-topbar { -fx-background-color: white; -fx-border-color: #e5eaf3; -fx-border-width: 0 0 1 0; -fx-padding: 17 26; -fx-min-height: 82; }
+.stitch-top-title { -fx-text-fill: #0b1c30; -fx-font-size: 22px; -fx-font-weight: bold; }
+.stitch-top-caption { -fx-text-fill: #64748b; -fx-font-size: 12px; }
+.stitch-user-name { -fx-text-fill: #24364d; -fx-font-weight: bold; }
+.stitch-user-role { -fx-text-fill: #1d4ed8; -fx-background-color: #e9efff; -fx-background-radius: 16; -fx-padding: 4 10; -fx-font-size: 10px; -fx-font-weight: bold; }
+.stitch-scroll, .stitch-scroll > .viewport { -fx-background-color: transparent; -fx-background-insets: 0; -fx-border-color: transparent; }
+.stitch-workspace { -fx-padding: 25 26 36 26; }
+.stitch-hero { -fx-background-color: linear-gradient(to right, #0b1c30, #1d4ed8); -fx-background-radius: 14; -fx-padding: 24 27; -fx-min-height: 168; }
+.stitch-role-jefe .stitch-hero { -fx-background-color: linear-gradient(to right, #10293f, #006194); }
+.stitch-role-secretario .stitch-hero { -fx-background-color: linear-gradient(to right, #0b1c30, #205799); }
+.stitch-hero-eyebrow { -fx-text-fill: #bad0ff; -fx-font-size: 10px; -fx-font-weight: bold; }
+.stitch-hero-title { -fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold; }
+.stitch-hero-caption { -fx-text-fill: #e1eafc; -fx-font-size: 13px; }
+.stitch-actions-box { -fx-padding: 12 13; -fx-background-color: #ffffff21; -fx-background-radius: 11; }
+.stitch-actions-label { -fx-text-fill: #d5e5ff; -fx-font-size: 10px; -fx-font-weight: bold; }
+.stitch-quick-btn { -fx-text-fill: #173f85; -fx-background-color: white; -fx-background-radius: 7; -fx-alignment: CENTER_LEFT; -fx-padding: 10 12; -fx-cursor: hand; }
+.stitch-quick-btn:hover { -fx-background-color: #eaf1ff; }
+.stitch-section-title { -fx-text-fill: #0b1c30; -fx-font-size: 18px; -fx-font-weight: bold; }
+.stitch-section-caption { -fx-text-fill: #718096; -fx-font-size: 11px; }
+.stitch-refresh { -fx-background-color: white; -fx-text-fill: #1d4ed8; -fx-border-color: #cad7f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 17; -fx-cursor: hand; }
+.stitch-refresh:hover { -fx-background-color: #eff4ff; }
+.stitch-stat-card { -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #e3e9f3; -fx-border-width: 1; -fx-padding: 17 18; -fx-min-height: 115; }
+.stitch-stat-name { -fx-text-fill: #53647a; -fx-font-size: 12px; -fx-font-weight: bold; }
+.stitch-stat-value { -fx-text-fill: #1d4ed8; -fx-font-size: 30px; -fx-font-weight: bold; }
+.stitch-stat-sky .stitch-stat-value { -fx-text-fill: #006194; }
+.stitch-stat-green .stitch-stat-value { -fx-text-fill: #13805e; }
+.stitch-stat-amber .stitch-stat-value { -fx-text-fill: #b8751a; }
+.stitch-stat-purple .stitch-stat-value { -fx-text-fill: #7452ad; }
+.stitch-stat-red .stitch-stat-value { -fx-text-fill: #bf4d4d; }
+.stitch-stat-caption { -fx-text-fill: #94a3b8; -fx-font-size: 10px; }
+.stitch-data-card { -fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #e4eaf4; -fx-padding: 16; }
+.stitch-card-title { -fx-text-fill: #0b1c30; -fx-font-weight: bold; -fx-font-size: 14px; }
+.stitch-inline-btn { -fx-text-fill: #1d4ed8; -fx-background-color: #eff4ff; -fx-background-radius: 7; -fx-padding: 8 12; -fx-cursor: hand; }
+.stitch-inline-btn:hover { -fx-background-color: #dae6ff; }
+.stitch-status-bar { -fx-background-color: white; -fx-background-radius: 9; -fx-padding: 11 15; -fx-border-color: #e6ebf2; -fx-border-radius: 9; }
+.stitch-status-dot { -fx-text-fill: #1e9a75; }
+.stitch-status-message { -fx-text-fill: #5c6f87; -fx-font-size: 11px; }
+.stitch-module-intro { -fx-background-color: #eff4ff; -fx-border-color: #e1eaff; }
+.stitch-root .table-view { -fx-background-color: white; -fx-border-color: #e4eaf4; -fx-border-radius: 8; -fx-background-radius: 8; }
+.stitch-root .table-view .column-header-background { -fx-background-color: #eff4ff; }
+.stitch-root .table-view .column-header .label { -fx-text-fill: #405773; }
+
+.inline-status { -fx-padding: 8 12; -fx-text-fill: #355572; -fx-background-color: #eff5fc; -fx-background-radius: 7; -fx-font-size: 12px; }
+.inline-error { -fx-text-fill: #ab2929; -fx-background-color: #ffebeb; -fx-border-color: #ffd0d0; -fx-border-radius: 7; }
+.inline-success { -fx-text-fill: #13734d; -fx-background-color: #e9f8f0; -fx-border-color: #c5efdc; -fx-border-radius: 7; }
+.loan-detail { -fx-text-fill: #214469; -fx-background-color: #eef5fd; -fx-padding: 12; -fx-background-radius: 8; -fx-font-size: 12px; }
+
+/* Identificación por carné y confirmación de préstamos/devoluciones */
+.scan-surface { -fx-background-color: #f5f8fe; -fx-padding: 13; }
+.scan-card { -fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #e0e8f3; -fx-border-radius: 15; -fx-padding: 24 30; -fx-min-height: 348; -fx-max-width: 1000; }
+.scan-card-detail { -fx-alignment: TOP_LEFT; -fx-padding: 15 24; }
+.scan-step { -fx-background-color: #e9efff; -fx-background-radius: 40; -fx-padding: 11 18; -fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: #1d4ed8; }
+.scan-symbol { -fx-font-size: 42px; -fx-text-fill: #1d4ed8; }
+.scan-title { -fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #0b1c30; }
+.scan-title-small { -fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #0b1c30; }
+.scan-subtitle { -fx-font-size: 13px; -fx-text-fill: #657991; -fx-text-alignment: CENTER; }
+.scan-eyebrow { -fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #1d4ed8; }
+.scan-input { -fx-padding: 12 15; -fx-font-size: 16px; -fx-alignment: CENTER; -fx-background-radius: 8; -fx-border-color: #a7bce0; -fx-border-radius: 8; }
+.scan-input:focused { -fx-border-color: #1d4ed8; -fx-border-width: 2; }
+.scan-main-button { -fx-font-size: 14px; -fx-padding: 14 26; }
+.scan-confirm { -fx-font-size: 13px; -fx-padding: 12 16; -fx-max-width: 10000; }
+.scan-person-card { -fx-background-color: #f5f8ff; -fx-background-radius: 10; -fx-padding: 12 15; -fx-border-color: #e5ecf6; -fx-border-radius: 10; }
+.scan-field-label { -fx-font-size: 11px; -fx-text-fill: #667a93; }
+.scan-field-value { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #193658; }
+
+
+/* Ajuste final para pantalla maximizada y navegación sin scroll de página. */
+.stitch-workspace-flat { -fx-padding: 11 16 12 16; }
+.stitch-sidebar { -fx-padding: 11 10 10 10; }
+.stitch-brand-block { -fx-padding: 3 7 9 7; }
+.stitch-brand-title { -fx-font-size: 18px; }
+.stitch-nav-label { -fx-padding: 3 8; }
+.stitch-nav-item, .stitch-nav-current { -fx-padding: 7 10; -fx-font-size: 11px; }
+.stitch-logout { -fx-padding: 8 10; }
+.stitch-sidebar-footer { -fx-padding: 3 8 0 8; }
+.stitch-topbar { -fx-padding: 9 16; -fx-min-height: 57; }
+.stitch-top-title { -fx-font-size: 19px; }
+.stitch-hero { -fx-padding: 11 18; -fx-min-height: 0; }
+.stitch-hero-title { -fx-font-size: 22px; }
+.stitch-hero-caption { -fx-font-size: 11px; }
+.stitch-actions-box { -fx-padding: 8 11; }
+.stitch-quick-btn { -fx-padding: 6 9; -fx-font-size: 11px; }
+.stitch-stat-card { -fx-padding: 9 13; -fx-min-height: 0; -fx-background-radius: 9; }
+.stitch-stat-value { -fx-font-size: 21px; }
+.stitch-stat-caption { -fx-font-size: 10px; }
+.stitch-metrics-grid { -fx-padding: 0; }
+.stitch-data-card { -fx-padding: 10 12; }
+.stitch-card-title { -fx-font-size: 13px; }
+.stitch-status-bar { -fx-padding: 3 7; }
+.page-content { -fx-padding: 12 16; }
+.module-content { -fx-spacing: 9; }
+.module-panel { -fx-padding: 11; }
+.compact-form { -fx-padding: 12; }
+.compact-form .button { -fx-padding: 7 11; }
+.compact-form .text-field, .compact-form .combo-box, .compact-form .password-field { -fx-padding: 3 6; }
+.compact-form .field-label { -fx-font-size: 10px; }
+.reportes-columnas { -fx-padding: 0; }
+.reportes-panel .text-field { -fx-padding: 5 7; }
+.compact-history { -fx-padding: 12 15; }
+.scan-card { -fx-min-height: 0; -fx-padding: 13 18; }
+.scan-card-detail { -fx-padding: 10 14; }
+.scan-title { -fx-font-size: 21px; }
+.scan-person-card { -fx-padding: 9 12; }
+.table-view { -fx-min-height: 80; }
+
+
+/* Ultima revision de pantallas: mismo tamano, controles y botones visibles. */
+.form-actions-bar { -fx-padding: 5 0 0 0; }
+.form-actions-bar .button { -fx-padding: 8 5; -fx-font-size: 11px; }
+.compact-form { -fx-spacing: 6; }
+.compact-form .inline-status { -fx-padding: 5 8; -fx-font-size: 10px; }
+.compact-form .text-field, .compact-form .combo-box, .compact-form .password-field {
+    -fx-min-height: 30; -fx-pref-height: 30;
+}
+.compact-form .field-label { -fx-font-size: 10px; }
+.workspace-split { -fx-min-height: 0; }
+.workspace-split .table-view { -fx-min-height: 90; }
+.stitch-workspace-flat { -fx-spacing: 7; }
+.stitch-sidebar { -fx-spacing: 2; }
+.stitch-stat-card { -fx-padding: 8 12; }
+/* Mantener acciones dentro del panel, sin reducir el area clicable. */
+.scan-card-detail { -fx-spacing: 8; }
+.scan-confirm { -fx-padding: 9 14; }
+.reportes-panel .table-view { -fx-min-height: 100; }
