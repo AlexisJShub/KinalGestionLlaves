@@ -50,20 +50,18 @@ public class ReportesController {
         tipo.setValue("Disponibilidad");
         desde.setValue(LocalDate.now().minusMonths(1));
         hasta.setValue(LocalDate.now());
-        espera.setOnFinished(e -> consultar());
-        tipo.valueProperty().addListener((obs, anterior, nuevo) -> {
-            notaGuardada = "";
+        espera.setOnFinished(e->consultar());
+        tipo.valueProperty().addListener((obs, anterior, nuevo)->{
+            notaGuardada="";
             cargarComentarios();
             programarConsulta();
         });
-        desde.valueProperty().addListener((obs, a, n) -> programarConsulta());
-        hasta.valueProperty().addListener((obs, a, n) -> programarConsulta());
-        filtro.textProperty().addListener((obs, a, n) -> programarConsulta());
-        comentario.textProperty().addListener((obs, a, n) -> actualizarComentario());
-        listaComentarios.getSelectionModel().selectedItemProperty().addListener((obs, a, n) -> {
-            if (n != null && !n.isBlank()) {
-                estadoComentario.setText("Comentario seleccionado: " + n);
-            }
+        desde.valueProperty().addListener((obs,a,n)->programarConsulta());
+        hasta.valueProperty().addListener((obs,a,n)->programarConsulta());
+        filtro.textProperty().addListener((obs,a,n)->programarConsulta());
+        comentario.textProperty().addListener((obs,a,n)->actualizarComentario());
+        listaComentarios.getSelectionModel().selectedItemProperty().addListener((obs,a,n)->{
+            if(n!=null && !n.isBlank())estadoComentario.setText("Comentario seleccionado: "+n);
         });
         actualizarComentario();
         consultar();
