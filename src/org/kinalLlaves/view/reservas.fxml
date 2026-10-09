@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.ReservasController" styleClass="page-root">
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar">
+            <Label text="Reservas de salones" styleClass="screen-title, module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="14" styleClass="page-content, module-content">
+            <HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro">
+                <VBox spacing="5">
+                    <Label text="Apartar salón" styleClass="module-eyebrow"/>
+                    <Label text="Elige un salón, fecha y hora." wrapText="true" styleClass="module-summary"/>
+                </VBox>
+            </HBox>
+            <VBox spacing="12" styleClass="panel, module-panel">
+                <Label text="Apartar salón" styleClass="section-title"/>
+                <Label text="Semanas: deja 1 para apartar solo una fecha. Si eliges varias, se mostrarán juntas." wrapText="true" styleClass="hint"/>
+                <HBox spacing="12">
+                    <ComboBox fx:id="salon" promptText="Salón" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="empleado" promptText="Empleado" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                    <DatePicker fx:id="fecha"/>
+                </HBox>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="Desde"/>
+                    <ComboBox fx:id="inicio"/>
+                    <Label text="Hasta"/>
+                    <ComboBox fx:id="fin"/>
+                    <Label text="Semanas"/>
+                    <Spinner fx:id="semanas" prefWidth="85" editable="true"/>
+                </HBox>
+                <HBox spacing="12">
+                    <TextField fx:id="observacion" promptText="Comentario (opcional)" HBox.hgrow="ALWAYS"/>
+                    <Button text="Guardar" onAction="#guardar" styleClass="primary-btn"/>
+                </HBox>
+            </VBox>
+            <Label fx:id="estadoReserva" text="Completa salón, empleado, fecha y hora para apartar." wrapText="true" styleClass="inline-status"/>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Lista de reservas" styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Cancelar reserva" onAction="#cancelar" styleClass="danger-btn"/>
+                <Button text="Cerrar reserva" onAction="#cerrar" styleClass="outline-btn"/>
+                <Button text="Actualizar" onAction="#recargar" styleClass="outline-btn"/>
+            </HBox>
+            <TableView styleClass="data-table" fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>
