@@ -238,3 +238,27 @@ public class ReportesController {
             mostrarError("No se pudo exportar Excel: " + MensajesUI.explicar(ex));
         }
     }
+
+    @FXML
+    private void pdf() {
+        if (rows.isEmpty()) {
+            mostrarError("Primero consulta un reporte con datos.");
+            return;
+        }
+        try {
+            Path archivo = elegir("pdf");
+            if (archivo != null) {
+                Exportaciones.pdf(archivo, "Reporte de " + tipo.getValue(), datosParaExportar());
+                estadoFiltros.setText("PDF guardado: " + archivo.getFileName());
+                MensajesUI.info("Reporte PDF guardado correctamente.");
+            }
+        } catch (Exception ex) {
+            mostrarError("No se pudo exportar PDF: " + MensajesUI.explicar(ex));
+        }
+    }
+
+    @FXML
+    private void volver() {
+        Main.dashboard();
+    }
+}
