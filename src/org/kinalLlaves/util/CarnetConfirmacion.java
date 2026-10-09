@@ -8,7 +8,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 
-
+/**
+ * Solicita el carné al operador o al empleado antes de acciones delicadas.
+ */
 public final class CarnetConfirmacion {
 
     private CarnetConfirmacion() {
