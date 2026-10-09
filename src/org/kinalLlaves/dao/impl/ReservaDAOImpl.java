@@ -3,7 +3,7 @@ package org.kinalLlaves.dao.impl;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
-import org.kinalLlaves.dao.ReservaDAO;
+import org.kinalllaves.dao.ReservaDAO;
 import org.kinalllaves.util.*;
 
 public class ReservaDAOImpl implements ReservaDAO {

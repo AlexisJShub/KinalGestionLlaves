@@ -8,7 +8,7 @@
             <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
         </HBox>
     </top>
-    <center>
+    <center> 
         <VBox spacing="14" styleClass="page-content, module-content">
             <HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro">
                 <VBox spacing="5">

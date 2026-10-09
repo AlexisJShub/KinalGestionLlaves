@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.ReportesController" styleClass="page-root">
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar">
+            <Label text="Reportes" styleClass="screen-title, module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="14" styleClass="page-content, module-content">
+            <HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro">
+                <VBox spacing="5">
+                    <Label text="Buscar información" styleClass="module-eyebrow"/>
+                    <Label text="Busca movimientos y guarda reportes." wrapText="true" styleClass="module-summary"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="12" VBox.vgrow="ALWAYS" styleClass="reportes-columnas">
+                <VBox spacing="10" HBox.hgrow="ALWAYS" minWidth="470" styleClass="reportes-panel">
+                    <VBox spacing="8" styleClass="panel, module-panel">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <ComboBox fx:id="tipo" prefWidth="180"/>
+                            <Label text="Desde"/>
+                            <DatePicker fx:id="desde"/>
+                            <Label text="Hasta"/>
+                            <DatePicker fx:id="hasta"/>
+                            <TextField fx:id="filtro" promptText="Buscar por nombre, salón o llave" HBox.hgrow="ALWAYS"/>
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Consultar" onAction="#consultar" styleClass="primary-btn"/>
+                            <Button fx:id="btnPdf" text="Guardar PDF" onAction="#pdf" styleClass="outline-btn"/>
+                            <Button fx:id="btnExcel" text="Guardar Excel" onAction="#excel" styleClass="outline-btn"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="total" text="Resultados: 0" styleClass="hint"/>
+                        </HBox>
+                        <Label fx:id="estadoFiltros" text="Elige un reporte y revisa los resultados." wrapText="true" styleClass="inline-status"/>
+                    </VBox>
+                    <TableView styleClass="data-table" fx:id="tabla" minHeight="160" VBox.vgrow="ALWAYS"/>
+                </VBox>
+                <VBox spacing="8" styleClass="panel,module-panel" minWidth="290" prefWidth="350" maxWidth="390">
+                    <Label text="Comentarios del reporte" styleClass="section-title"/>
+                    <Label text="Escribe una observación para que quede guardada con el usuario y la fecha." wrapText="true" styleClass="hint"/>
+                    <Label fx:id="contadorComentario" text="0 / 500 caracteres" styleClass="hint"/>
+                    <TextArea fx:id="comentario" promptText="Comentario (por ejemplo: Revisar llaves pendientes)" prefRowCount="3" wrapText="true"/>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Button fx:id="btnGuardarComentario" text="Guardar comentario" onAction="#guardarComentario" styleClass="primary-btn"/>
+                        <Label fx:id="estadoComentario" text="Los comentarios se guardan en la base de datos." wrapText="true" styleClass="hint"/>
+                    </HBox>
+                    <ListView fx:id="listaComentarios" VBox.vgrow="ALWAYS" minHeight="75"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
