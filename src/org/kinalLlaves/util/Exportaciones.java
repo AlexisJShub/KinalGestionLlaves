@@ -6,6 +6,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.zip.*;
 
+
 public final class Exportaciones {
 
     private Exportaciones() {
@@ -109,35 +110,4 @@ public final class Exportaciones {
             buf.write("\nendstream".getBytes(StandardCharsets.ISO_8859_1));
             object.add(buf.toByteArray());
         }
-        object.add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".getBytes(StandardCharsets.ISO_8859_1));
-        try (OutputStream out = Files.newOutputStream(archivo)) {
-            out.write("%PDF-1.4\n".getBytes(StandardCharsets.ISO_8859_1));
-            List<Integer> offsets = new ArrayList<>();
-            offsets.add(0);
-            int length = 9;
-            for (int i = 1; i < object.size(); i++) {
-                offsets.add(length);
-                byte[] obj = (i + " 0 obj\n").getBytes(StandardCharsets.ISO_8859_1);
-                out.write(obj);
-                length += obj.length;
-                out.write(object.get(i));
-                length += object.get(i).length;
-                byte[] tail = "\nendobj\n".getBytes(StandardCharsets.ISO_8859_1);
-                out.write(tail);
-                length += tail.length;
-            }
-            int xref = length;
-            StringBuilder end = new StringBuilder("xref\n0 " + object.size() + "\n0000000000 65535 f \n");
-            for (int i = 1; i < offsets.size(); i++) {
-                end.append(String.format("%010d 00000 n \n", offsets.get(i)));
-            }
-            end.append("trailer\n<< /Size ").append(object.size()).append(" /Root 1 0 R >>\nstartxref\n").append(xref).append("\n%%EOF");
-            out.write(end.toString().getBytes(StandardCharsets.ISO_8859_1));
-        }
-    }
-
-    private static String pdfEscape(String s) {
-        String value = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{M}", "");
-        return value.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)").replaceAll("[^\\x20-\\x7E]", "?");
-    }
-}
+  
