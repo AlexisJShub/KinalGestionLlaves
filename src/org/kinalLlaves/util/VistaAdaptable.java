@@ -4,7 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.transform.Scale;
-
+ 
 /**
  * Mantiene la interfaz completa visible en un unico escenario, sin barras de
  * desplazamiento para toda la pagina. Ajusta proporcionalmente la vista a la
