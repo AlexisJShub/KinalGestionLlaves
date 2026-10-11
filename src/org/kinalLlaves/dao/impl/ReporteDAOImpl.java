@@ -4,7 +4,7 @@ import org.kinalllaves.dao.ReporteDAO;
 import java.sql.*;
 import java.util.*;
 import java.time.*;
-import org.kinalllaves.util.*;
+import org.kinalLlaves.util.*;
 
 public class ReporteDAOImpl implements ReporteDAO {
 
