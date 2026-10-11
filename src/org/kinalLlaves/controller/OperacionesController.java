@@ -412,3 +412,4 @@ public class OperacionesController {
         destino.getStyleClass().add(error ? "inline-error" : "inline-success");
     }
 }
+
