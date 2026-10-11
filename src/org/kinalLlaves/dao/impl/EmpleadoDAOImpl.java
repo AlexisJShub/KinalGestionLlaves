@@ -31,7 +31,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
         }
         String sql = "SELECT id_empleado, nombres, apellidos, carnet, cui, puesto "
                 + "FROM empleados WHERE activo = 1 AND (carnet = ? OR uid_rfid = ?)";
-        try (Connection conexion = Conexion.getInstancia().conectar(); PreparedStatement consulta = conexion.prepareStatement(sql)) {
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             PreparedStatement consulta = conexion.prepareStatement(sql)) {
             consulta.setString(1, codigo.trim());
             consulta.setString(2, codigo.trim());
             try (ResultSet resultado = consulta.executeQuery()) {
