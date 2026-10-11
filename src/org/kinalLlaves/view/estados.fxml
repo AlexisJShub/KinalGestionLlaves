@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.EstadosController" styleClass="page-root,stitch-root">
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="stitch-topbar">
+            <Label text="Estado de llaves" styleClass="screen-title, module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="14" styleClass="page-content, module-content,stitch-workspace">
+            <HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro,stitch-module-intro">
+                <VBox spacing="5">
+                    <Label text="Estado actual" styleClass="module-eyebrow"/>
+                    <Label text="Mira qué llaves están disponibles o prestadas." wrapText="true" styleClass="module-summary"/>
+                </VBox>
+            </HBox>
+            <Label text="Llaves y salones registrados." styleClass="hint"/>
+            <HBox spacing="10">
+                <TextField fx:id="filtro" promptText="Buscar salón, llave o responsable" HBox.hgrow="ALWAYS" onAction="#recargar"/>
+                <Button text="Actualizar" onAction="#recargar" styleClass="primary-btn"/>
+            </HBox>
+            <TableView styleClass="data-table" fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>
