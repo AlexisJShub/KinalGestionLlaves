@@ -1,4 +1,4 @@
-package org.kinalLlaves.dao.impl;
+package org.kinalllaves.dao.impl;
 
 import java.sql.*;
 import java.time.LocalDateTime;

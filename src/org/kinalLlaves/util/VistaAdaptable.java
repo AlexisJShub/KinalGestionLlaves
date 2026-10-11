@@ -1,4 +1,4 @@
-package org.kinalLlaves.util;
+package org.kinalllaves.util;
 
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;

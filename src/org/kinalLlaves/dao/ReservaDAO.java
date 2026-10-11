@@ -1,4 +1,4 @@
-package org.kinalLlaves.dao;
+package org.kinalllaves.dao;
 
 public interface ReservaDAO {
 

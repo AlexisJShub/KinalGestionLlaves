@@ -1,6 +1,6 @@
 package org.kinalllaves.controller;
 
-public class DashboardJefeController extends DashboardBaseController {
+public class Dashboard_jefeController extends DashboardBaseController {
 
     @Override
     protected String rol() {
