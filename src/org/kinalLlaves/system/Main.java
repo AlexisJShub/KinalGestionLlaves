@@ -40,51 +40,25 @@ public class Main extends Application {
             Map.entry("auditoria.fxml", "AUDITORIA"),
             Map.entry("reportes.fxml", "REPORTES"));
 
-    private static Stage stagePrincipal;
-    private static Scene escenaPrincipal;
-    private static Object controladorVistaActual;
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) {
-        stagePrincipal = stage;
-        stage.setResizable(true);
-        Rectangle2D area = Screen.getPrimary().getVisualBounds();
-        stage.setMinWidth(Math.min(780, area.getWidth()));
-        stage.setMinHeight(Math.min(520, area.getHeight()));
+    public void start(Stage primary) {
+        stage = primary;
+        stage.setMinWidth(780);
+        stage.setMinHeight(520);
         abrir("login.fxml", "Iniciar sesión");
         stage.setMaximized(true);
     }
 
-    /**
-     * Entrada de navegación utilizada por los controladores del proyecto.
-     * Se conserva por compatibilidad con sus acciones FXML.
-     */
-    public static void abrir(String archivoFxml, String titulo) {
-        cambiarVista(archivoFxml, titulo, 1360, 830);
-    }
-
-    /**
-     * Carga una vista en la MISMA ventana, sin recrear el Stage.
-     * Admite tanto rutas completas como nombres de archivos del directorio view.
-     * Se mantiene la comprobación de sesión, rol y permisos.
-     */
-    public static void cambiarVista(String rutaFxml, String titulo, double ancho, double alto) {
-        if (stagePrincipal == null) {
-            throw new IllegalStateException("La aplicación aún no ha iniciado");
+    public static void abrir(String archivo, String titulo) {
+        if (stage == null) {
+            throw new IllegalStateException("La aplicación todavía no ha iniciado");
         }
-        if (rutaFxml == null || rutaFxml.isBlank()) {
-            MensajesUI.error("Indica una vista válida", null);
-            return;
-        }
-
-        String archivo = rutaFxml.replace('\\', '/');
-        archivo = archivo.substring(archivo.lastIndexOf('/') + 1);
         if (!"login.fxml".equals(archivo) && Sesion.actual() == null) {
-            abrirLogin();
+            mostrarLogin();
             return;
         }
         String permiso = VISTAS_PROTEGIDAS.get(archivo);
@@ -161,11 +135,19 @@ public class Main extends Application {
 
     public static void dashboard() {
         if (Sesion.actual() == null) {
-            abrirLogin();
+            mostrarLogin();
             return;
         }
-        String archivo = dashboardDelRol();
-        abrir(archivo, "Panel principal");
+        switch (Sesion.actual().rol()) {
+            case "ADMIN" ->
+                abrir("dashboard_admin.fxml", "Administración");
+            case "JEFE" ->
+                abrir("dashboard_jefe.fxml", "Jefatura de Secretaría");
+            case "SECRETARIO" ->
+                abrir("dashboard_secretario.fxml", "Secretaría");
+            default ->
+                mostrarLogin();
+        }
     }
 
     public static void modulo(String modulo) {
