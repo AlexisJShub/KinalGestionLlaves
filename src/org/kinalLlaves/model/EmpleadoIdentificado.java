@@ -8,3 +8,4 @@ public record EmpleadoIdentificado(long id, String nombres, String apellidos,
         return (nombres + " " + apellidos).trim();
     }
 }
+ 
