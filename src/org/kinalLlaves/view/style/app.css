@@ -1,4 +1,4 @@
-/* KinalLlaves · diseño institucional, JavaFX 21. Sin bibliotecas gráficas externas. */
+
 .root {
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 13px;
@@ -328,6 +328,7 @@
     -fx-background-color: #edf2f7;
     -fx-padding: 2;
 }
+
 /* Pantalla de acceso */
 .login-root {
     -fx-background-color: #f5f8fc;
@@ -471,7 +472,6 @@
     -fx-border-color: #d7e2ef;
     -fx-padding: 10;
 }
-
 
 /* Adaptación nativa JavaFX de Stitch: panel administrativo, supervisión y operación.
    Paleta: índigo #1d4ed8, superficies #f8f9ff y azul marino #0b1c30.
@@ -858,7 +858,6 @@
     -fx-text-fill: #193658;
 }
 
-
 /* Ajuste final para pantalla maximizada y navegación sin scroll de página. */
 .stitch-workspace-flat {
     -fx-padding: 11 16 12 16;
@@ -979,7 +978,6 @@
     -fx-min-height: 80;
 }
 
-
 /* Ultima revision de pantallas: mismo tamano, controles y botones visibles. */
 .form-actions-bar {
     -fx-padding: 5 0 0 0;
@@ -1017,7 +1015,6 @@
 .stitch-stat-card {
     -fx-padding: 8 12;
 }
-/* Mantener acciones dentro del panel, sin reducir el area clicable. */
 .scan-card-detail {
     -fx-spacing: 8;
 }

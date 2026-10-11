@@ -1,4 +1,4 @@
-package org.kinalLlaves.controller;
+package org.kinalllaves.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,6 +7,7 @@ import org.kinalllaves.dao.impl.OperacionDAOImpl;
 import org.kinalllaves.system.Main;
 import org.kinalllaves.util.*;
 import java.util.*;
+
  
 public abstract class DashboardBaseController {
 
