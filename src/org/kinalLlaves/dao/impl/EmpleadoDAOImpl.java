@@ -1,4 +1,4 @@
-package org.kinalLlaves.dao.impl;
+package org.kinalllaves.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import org.kinalllaves.model.EmpleadoIdentificado;
 import org.kinalllaves.util.Conexion;
 import org.kinalllaves.util.Permisos;
  
+
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 
     @Override
