@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.AuditoriaController" styleClass="page-root">
+    <top>
+        <HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar">
+            <Label text="Auditoría" styleClass="screen-title, module-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Inicio" onAction="#volver" styleClass="outline-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox styleClass="page-content, module-content" spacing="14">
+            <HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro">
+                <VBox spacing="5">
+                    <Label text="Registro de acciones" styleClass="module-eyebrow"/>
+                    <Label text="Aquí puedes ver lo que se hizo en el sistema." wrapText="true" styleClass="module-summary"/>
+                </VBox>
+            </HBox>
+            <Label text="Movimientos registrados" styleClass="hint"/>
+            <HBox spacing="8">
+                <TextField fx:id="filtro" onAction="#recargar" HBox.hgrow="ALWAYS" promptText="Buscar registro"/>
+                <Button text="Actualizar" onAction="#recargar" styleClass="primary-btn"/>
+            </HBox>
+            <TableView styleClass="data-table" fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>
