@@ -1,4 +1,4 @@
-package org.kinalLlaves.model;
+package org.kinalllaves.model;
 
 import java.time.LocalDateTime;
 
