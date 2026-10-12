@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.kinalllaves.dao.DevolucionDAO;
 import org.kinalllaves.model.Devolucion;
 import org.kinalllaves.util.Conexion;
@@ -16,32 +14,34 @@ public class DevolucionDAOImpl implements DevolucionDAO {
 
     @Override
     public boolean registrarDevolucion(Devolucion devolucion) {
-        String sqlDevolucion = "INSERT INTO Devolucion (id_entrega, fecha_hora_devolucion, id_empleado_devuelve, id_secretario, observaciones) VALUES (?, ?, ?, ?, ?)";
-        String sqlActualizarLlave = "UPDATE Llave SET estado = 'DISPONIBLE' WHERE id_llave = (SELECT id_llave FROM Entrega WHERE id_entrega = ?)";
+        boolean exito = false;
+        String sqlDev = "INSERT INTO Devolucion (id_entrega, fecha_hora_devolucion, id_empleado_devuelve, id_secretario, observaciones) VALUES (?, ?, ?, ?, ?)";
+        String sqlActualizarLlave = "UPDATE Llave l JOIN Entrega e ON l.id_llave = e.id_llave SET l.estado = 'DISPONIBLE' WHERE e.id_entrega = ?";
 
         Connection con = null;
         PreparedStatement psDev = null;
         PreparedStatement psLlave = null;
-        boolean exito = false;
 
         try {
             con = Conexion.getInstancia().getConexion();
             con.setAutoCommit(false);
 
-            psDev = con.prepareStatement(sqlDevolucion);
+            // 1. Insertar el registro de la devolución
+            psDev = con.prepareStatement(sqlDev);
             psDev.setInt(1, devolucion.getIdEntrega());
-            psDev.setTimestamp(2, Timestamp.valueOf(devolucion.getFechaHoraDevolucion()));
+            psDev.setTimestamp(2, java.sql.Timestamp.valueOf(devolucion.getFechaHoraDevolucion()));
             psDev.setInt(3, devolucion.getIdEmpleadoDevuelve());
             psDev.setInt(4, devolucion.getIdSecretario());
             psDev.setString(5, devolucion.getObservaciones());
 
             int filasDev = psDev.executeUpdate();
 
+            // 2. Actualizar el estado de la llave a disponible
             psLlave = con.prepareStatement(sqlActualizarLlave);
             psLlave.setInt(1, devolucion.getIdEntrega());
             int filasLlave = psLlave.executeUpdate();
 
-            if (filasDev > 0 && filasLlave > 0) {
+            if (filasDev > 0) {
                 con.commit();
                 exito = true;
             } else {
@@ -81,7 +81,8 @@ public class DevolucionDAOImpl implements DevolucionDAO {
         String sql = "SELECT * FROM Devolucion WHERE id_entrega = ?";
         Devolucion devolucion = null;
 
-        try (Connection con = Conexion.getInstancia().getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getInstancia().getConexion(); 
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, idEntrega);
             try (ResultSet rs = ps.executeQuery()) {
@@ -107,7 +108,9 @@ public class DevolucionDAOImpl implements DevolucionDAO {
         String sql = "SELECT * FROM Devolucion ORDER BY fecha_hora_devolucion DESC";
         List<Devolucion> lista = new ArrayList<>();
 
-        try (Connection con = Conexion.getInstancia().getConexion(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try (Connection con = Conexion.getInstancia().getConexion(); 
+             PreparedStatement ps = con.prepareStatement(sql); 
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Devolucion dev = new Devolucion();

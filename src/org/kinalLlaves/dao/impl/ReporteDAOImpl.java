@@ -8,7 +8,6 @@ import org.kinalllaves.util.*;
 
 public class ReporteDAOImpl implements ReporteDAO {
 
-    @Override
     public List<Map<String, Object>> consultar(String tipo, LocalDate desde, LocalDate hasta, String filtro) throws SQLException {
         Permisos.exigir("REPORTES");
         if (desde == null || hasta == null || hasta.isBefore(desde)) {
@@ -48,7 +47,6 @@ public class ReporteDAOImpl implements ReporteDAO {
         return rows;
     }
 
-    @Override
     public void guardarComentario(String tipo, LocalDate desde, LocalDate hasta, String comentario) throws SQLException {
         Permisos.exigir("REPORTES");
         if (tipo == null || tipo.isBlank()) {
@@ -65,8 +63,7 @@ public class ReporteDAOImpl implements ReporteDAO {
         }
         try (Connection c = Conexion.getInstancia().conectar()) {
             c.setAutoCommit(false);
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO comentarios_reporte(id_usuario,tipo_reporte,fecha_desde,fecha_hasta,comentario) VALUES(?,?,?,?,?)"); 
-                 PreparedStatement a = c.prepareStatement("INSERT INTO auditoria(id_usuario,evento,entidad,detalle) VALUES(?,'COMENTARIO','REPORTES',?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO comentarios_reporte(id_usuario,tipo_reporte,fecha_desde,fecha_hasta,comentario) VALUES(?,?,?,?,?)"); PreparedStatement a = c.prepareStatement("INSERT INTO auditoria(id_usuario,evento,entidad,detalle) VALUES(?,'COMENTARIO','REPORTES',?)")) {
                 p.setLong(1, Sesion.id());
                 p.setString(2, tipo);
                 p.setDate(3, java.sql.Date.valueOf(desde));
@@ -84,7 +81,6 @@ public class ReporteDAOImpl implements ReporteDAO {
         }
     }
 
-    @Override
     public List<String> comentarios(String tipo) throws SQLException {
         Permisos.exigir("REPORTES");
         List<String> resultado = new ArrayList<>();
@@ -100,4 +96,5 @@ public class ReporteDAOImpl implements ReporteDAO {
         }
         return resultado;
     }
+
 }

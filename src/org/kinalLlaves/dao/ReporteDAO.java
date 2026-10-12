@@ -1,15 +1,10 @@
 package org.kinalllaves.dao;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-
 public interface ReporteDAO {
 
-    List<Map<String, Object>> consultar(String tipo, LocalDate desde, LocalDate hasta, String filtro) throws SQLException;
+    void guardarComentario(String tipo, java.time.LocalDate desde, java.time.LocalDate hasta, String comentario) throws java.sql.SQLException;
 
-    void guardarComentario(String tipo, LocalDate desde, LocalDate hasta, String comentario) throws SQLException;
+    java.util.List<String> comentarios(String tipo) throws java.sql.SQLException;
 
-    List<String> comentarios(String tipo) throws SQLException;
+    java.util.List<java.util.Map<String, Object>> consultar(String tipo, java.time.LocalDate desde, java.time.LocalDate hasta, String filtro) throws java.sql.SQLException;
 }

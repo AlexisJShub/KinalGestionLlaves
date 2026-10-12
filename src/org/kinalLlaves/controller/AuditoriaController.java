@@ -1,4 +1,4 @@
-package org.kinalLlaves.controller;
+package org.kinalllaves.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
