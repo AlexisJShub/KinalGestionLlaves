@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kinalllaves.controller.IncidenciasController" styleClass="page-root">
+ <top><HBox alignment="CENTER_LEFT" styleClass="topbar, module-topbar"><Label text="Incidencias" styleClass="screen-title, module-title"/><Region HBox.hgrow="ALWAYS"/><Button text="Inicio" onAction="#volver" styleClass="outline-btn"/></HBox></top>
+ <center><VBox spacing="14" styleClass="page-content, module-content"><HBox alignment="CENTER_LEFT" spacing="14" styleClass="module-intro"><VBox spacing="5"><Label text="Problemas con llaves" styleClass="module-eyebrow"/><Label text="Registra problemas con una llave." wrapText="true" styleClass="module-summary"/></VBox></HBox><HBox spacing="14">
+  <VBox spacing="10" prefWidth="430" styleClass="panel, module-panel"><Label text="Agregar problema" styleClass="section-title"/>
+   <ComboBox fx:id="tipo" maxWidth="Infinity"/><ComboBox fx:id="entrega" promptText="Préstamo (si tiene)" maxWidth="Infinity"/>
+   <ComboBox fx:id="llave" promptText="Llave (si no eliges préstamo)" maxWidth="Infinity"/>
+   <TextArea fx:id="descripcion" prefRowCount="3" promptText="¿Qué pasó?" wrapText="true"/>
+   <Button text="Guardar problema" onAction="#guardar" styleClass="primary-btn" maxWidth="Infinity"/>
+  </VBox>
+  <VBox spacing="10" styleClass="panel, module-panel" HBox.hgrow="ALWAYS"><Label text="Cambiar estado" styleClass="section-title"/>
+   <Label text="Solo lo cambia el administrador o el jefe." wrapText="true" styleClass="hint"/>
+   <ComboBox fx:id="estado" maxWidth="Infinity"/><Button fx:id="btnGestion" text="Guardar estado" onAction="#cambiar" styleClass="outline-btn" maxWidth="Infinity"/>
+  </VBox>
+ </HBox><Label text="Problemas registrados" styleClass="section-title"/><TableView styleClass="data-table" fx:id="tabla" VBox.vgrow="ALWAYS"/></VBox></center>
+</BorderPane>
