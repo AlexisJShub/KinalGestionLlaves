@@ -1,3 +1,5 @@
+
+
 USE dbkinalllaves;
 
 INSERT INTO roles(codigo,nombre) VALUES
@@ -24,19 +26,19 @@ INSERT IGNORE INTO rol_permiso(id_rol,id_permiso)
  ('ESTADOS','ENTREGAS','DEVOLUCIONES','RESERVAS','INCIDENCIAS','REPORTES');
 INSERT INTO usuarios (username,nombre_completo,password_hash,id_rol,activo)
 SELECT 'admin1','Administrador de Demostración',
-       'pbkdf2$210000$gakTg5sND/kjSRNUkAehYw==$eBBLPnDR/RPUvIkj4kl9f3NMwTsKZVSpolI9FBRzJB0=',r.id_rol,1
+       'pbkdf2$210000$ux2JCHWUZ6sbDzE7TSuCeg==$M61/vswEYfT3nRFhJZDPS/OzN+7ZEs1FpibeXBxjSJM=',r.id_rol,1
 FROM roles r WHERE r.codigo='ADMIN'
 AND NOT EXISTS (SELECT 1 FROM usuarios u WHERE u.username='admin1');
 
 INSERT INTO usuarios (username,nombre_completo,password_hash,id_rol,activo)
 SELECT 'jefe1','Jefe de Secretaría Demo',
-       'pbkdf2$210000$0F0MYWI8ybFEBfbX/xOaxg==$Ihw22v/xaKc7GeElU3y/G68QwnJokO17wqV77EWQ+bw=',r.id_rol,1
+       'pbkdf2$210000$EqJAUla0wdIEMtth4aPiFg==$7EU2ls9zr5jhnept8F7IX0PDYVr/7Usj+56zOxQ3YPc=',r.id_rol,1
 FROM roles r WHERE r.codigo='JEFE'
 AND NOT EXISTS (SELECT 1 FROM usuarios u WHERE u.username='jefe1');
 
 INSERT INTO usuarios (username,nombre_completo,password_hash,id_rol,activo)
 SELECT 'secretario1','Secretario de Demostración',
-       'pbkdf2$210000$c+UB4QfxspIHGSp6YRrKrQ==$vaj8aY8cTwAxCpSVWwq3flJDgLiF++BdxxirxKQwEQM=',r.id_rol,1
+       'pbkdf2$210000$gPZAxcRL/hNa9aUNp2B7lw==$nHEa7HVaTiLLtbDMgWYhwADXMHQx1DKNnkBbO3y95WE=',r.id_rol,1
 FROM roles r WHERE r.codigo='SECRETARIO'
 AND NOT EXISTS (SELECT 1 FROM usuarios u WHERE u.username='secretario1');
 

@@ -79,7 +79,7 @@ BEGIN
  SET v_id=LAST_INSERT_ID();
  UPDATE entregas SET estado='CERRADA' WHERE id_entrega=p_entrega;
  UPDATE llaves SET estado=CASE
-  WHEN estado IN ('DANADA','FUERA_SERVICIO') THEN estado
+  WHEN estado IN ('EXTRAVIADA','DANADA','FUERA_SERVICIO') THEN estado
   ELSE 'DISPONIBLE' END WHERE id_llave=v_llave;
  INSERT INTO auditoria(id_usuario,evento,entidad,id_entidad,detalle)
  VALUES(p_usuario,'DEVOLUCION','devoluciones',v_id,CONCAT('Entrega ',p_entrega,' devolvio ',p_devuelve));

@@ -1,5 +1,6 @@
-DROP DATABASE IF EXISTS dbkinalllaves;
-CREATE DATABASE dbkinalllaves CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+CREATE DATABASE IF NOT EXISTS dbkinalllaves CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE dbkinalllaves;
 CREATE TABLE IF NOT EXISTS roles (
  id_rol INT PRIMARY KEY AUTO_INCREMENT, codigo VARCHAR(25) NOT NULL UNIQUE,
