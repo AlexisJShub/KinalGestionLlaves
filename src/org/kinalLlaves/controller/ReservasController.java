@@ -1,4 +1,4 @@
-package org.kinalLlaves.controller;
+package org.kinalllaves.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

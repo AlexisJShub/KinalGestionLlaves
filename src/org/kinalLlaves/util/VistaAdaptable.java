@@ -27,6 +27,7 @@ public final class VistaAdaptable extends Pane {
     protected void layoutChildren() {
         double anchoVentana = Math.max(1, getWidth());
         double altoVentana = Math.max(1, getHeight());
+
         double altoRequerido = contenido.prefHeight(ANCHO_DISENO);
         if (!Double.isFinite(altoRequerido) || altoRequerido < 1) {
             altoRequerido = ALTO_BASE;

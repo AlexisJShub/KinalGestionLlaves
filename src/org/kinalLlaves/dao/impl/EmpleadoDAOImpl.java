@@ -8,7 +8,6 @@ import org.kinalllaves.dao.EmpleadoDAO;
 import org.kinalllaves.model.EmpleadoIdentificado;
 import org.kinalllaves.util.Conexion;
 import org.kinalllaves.util.Permisos;
- 
 
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 

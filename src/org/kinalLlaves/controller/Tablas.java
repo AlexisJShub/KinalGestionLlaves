@@ -7,10 +7,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Label;
 import java.util.*;
 
-/**
- * Utilidad visual: preserva columnas incluso cuando un filtro devuelve cero
- * filas.
- */
 public final class Tablas {
 
     private Tablas() {
@@ -21,7 +17,7 @@ public final class Tablas {
     }
 
     public static void mostrar(TableView<Map<String, Object>> tabla, List<Map<String, Object>> items, String filtro, String... columnasPorDefecto) {
-        // El ancho de cada columna se establece con setPrefWidth al construir las columnas.
+
         Set<String> cols = new LinkedHashSet<>();
         if (items != null && !items.isEmpty()) {
             cols.addAll(items.get(0).keySet());

@@ -8,7 +8,6 @@ import org.kinalllaves.system.Main;
 import org.kinalllaves.util.*;
 import java.util.*;
 
- 
 public abstract class DashboardBaseController {
 
     @FXML

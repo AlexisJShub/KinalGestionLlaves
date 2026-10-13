@@ -1,105 +1,175 @@
 package org.kinalllaves.system;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Map;
-import org.kinalllaves.controller.CatalogoController;
-import org.kinalllaves.util.*;
+import java.util.function.Consumer;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import org.kinalllaves.util.MensajesUI;
+import org.kinalllaves.util.Permisos;
+import org.kinalllaves.util.Sesion;
+import org.kinalllaves.util.VistaAdaptable;
 
-/** Navegación centralizada: ninguna pantalla protegida se abre sin sesión y permiso. */
-public class Main extends Application {
-    private static Stage stage;
+public final class Main {
+
+    private static final String BASE_VISTAS = "/org/kinalllaves/view/";
+    private static final String CSS = BASE_VISTAS + "style/app.css";
+    private static final Map<String, String> MODULOS = Map.of(
+            "USUARIOS", "usuarios.fxml",
+            "EMPLEADOS", "empleados.fxml",
+            "SALONES", "salones.fxml",
+            "LLAVES", "llaves.fxml");
+    private static final Map<String, String> VISTAS_PROTEGIDAS = Map.ofEntries(
+            Map.entry("usuarios.fxml", "USUARIOS"),
+            Map.entry("empleados.fxml", "EMPLEADOS"),
+            Map.entry("salones.fxml", "SALONES"),
+            Map.entry("llaves.fxml", "LLAVES"),
+            Map.entry("estados.fxml", "ESTADOS"),
+            Map.entry("operaciones.fxml", "ENTREGAS"),
+            Map.entry("reservas.fxml", "RESERVAS"),
+            Map.entry("incidencias.fxml", "INCIDENCIAS"),
+            Map.entry("auditoria.fxml", "AUDITORIA"),
+            Map.entry("reportes.fxml", "REPORTES"));
+
+    private static Stage stagePrincipal;
     private static Scene escenaPrincipal;
-    private static final String BASE = "/org/kinalllaves/view/";
-    private static final Map<String,String> MODULOS = Map.of(
-        "USUARIOS", "usuarios.fxml", "EMPLEADOS", "empleados.fxml",
-        "SALONES", "salones.fxml", "LLAVES", "llaves.fxml");
-    private static final Map<String,String> VISTAS_PROTEGIDAS = Map.ofEntries(
-        Map.entry("usuarios.fxml", "USUARIOS"),
-        Map.entry("empleados.fxml", "EMPLEADOS"),
-        Map.entry("salones.fxml", "SALONES"),
-        Map.entry("llaves.fxml", "LLAVES"),
-        Map.entry("estados.fxml", "ESTADOS"),
-        Map.entry("operaciones.fxml", "ENTREGAS"),
-        Map.entry("reservas.fxml", "RESERVAS"),
-        Map.entry("incidencias.fxml", "INCIDENCIAS"),
-        Map.entry("auditoria.fxml", "AUDITORIA"),
-        Map.entry("reportes.fxml", "REPORTES"));
+    private static Object controladorVistaActual;
 
-    public static void main(String[] args) { launch(args); }
+    private Main() { }
 
-    @Override public void start(Stage primary) {
-        stage = primary;
-        stage.setMinWidth(780);
-        stage.setMinHeight(520);
+    public static void main(String[] args) {
+
+        Application.launch(FxApplication.class, args);
+    }
+
+    public static class FxApplication extends Application {
+        @Override
+        public void start(Stage stage) {
+            Main.iniciar(stage);
+        }
+    }
+
+    private static void iniciar(Stage stage) {
+        stagePrincipal = stage;
+        stage.setResizable(true);
+        Rectangle2D area = Screen.getPrimary().getVisualBounds();
+        stage.setMinWidth(Math.min(780, area.getWidth()));
+        stage.setMinHeight(Math.min(520, area.getHeight()));
         abrir("login.fxml", "Iniciar sesión");
         stage.setMaximized(true);
     }
 
-    public static void abrir(String archivo, String titulo) {
-        if (stage == null) throw new IllegalStateException("La aplicación todavía no ha iniciado");
+    public static void abrir(String archivoFxml, String titulo) {
+        cambiarVista(archivoFxml, titulo, 1360, 830);
+    }
+
+    public static void cambiarVista(String rutaFxml, String titulo, double ancho, double alto) {
+        if (stagePrincipal == null) {
+            throw new IllegalStateException("La aplicación aún no ha iniciado");
+        }
+        if (rutaFxml == null || rutaFxml.isBlank()) {
+            MensajesUI.error("Indica una vista válida", null);
+            return;
+        }
+
+        String archivo = rutaFxml.replace('\\', '/');
+        archivo = archivo.substring(archivo.lastIndexOf('/') + 1);
         if (!"login.fxml".equals(archivo) && Sesion.actual() == null) {
-            mostrarLogin(); return;
+            abrirLogin();
+            return;
         }
         String permiso = VISTAS_PROTEGIDAS.get(archivo);
         if (permiso != null && !Permisos.puede(permiso)) {
             MensajesUI.error("No tienes permiso para acceder a: " + titulo, null);
             return;
         }
-        if (archivo.startsWith("dashboard_")) {
-            String rol = Sesion.actual().rol();
-            String esperado = switch (rol) {
-                case "ADMIN" -> "dashboard_admin.fxml";
-                case "JEFE" -> "dashboard_jefe.fxml";
-                case "SECRETARIO" -> "dashboard_secretario.fxml";
-                default -> "login.fxml";
-            };
-            if (!archivo.equals(esperado)) {
-                MensajesUI.error("Dashboard no permitido para el rol actual", null);
-                return;
-            }
+        if (archivo.startsWith("dashboard_") && !archivo.equals(dashboardDelRol())) {
+            MensajesUI.error("Dashboard no permitido para el rol actual", null);
+            return;
         }
+
         try {
-            URL fxml = Main.class.getResource(BASE + archivo);
-            if (fxml == null) throw new IllegalStateException("No se encontró el archivo " + BASE + archivo);
-            FXMLLoader loader = new FXMLLoader(fxml);
-            Parent root = loader.load();
-            VistaAdaptable contenidoAjustable = new VistaAdaptable(root);
-            if (escenaPrincipal == null) {
-                escenaPrincipal = new Scene(contenidoAjustable, 1360, 830);
-                URL css = Main.class.getResource(BASE + "style/app.css");
-                if (css != null) escenaPrincipal.getStylesheets().add(css.toExternalForm());
-                stage.setScene(escenaPrincipal);
-            } else {
-                // Conservar la misma Scene evita saltos de dimensiones al navegar.
-                escenaPrincipal.setRoot(contenidoAjustable);
+            String ruta = rutaFxml.startsWith("/") ? rutaFxml : BASE_VISTAS + archivo;
+            URL recurso = Main.class.getResource(ruta);
+            if (recurso == null) {
+                throw new IllegalStateException("No se encontró el FXML: " + ruta);
             }
-            stage.setTitle("KinalLlaves | " + titulo);
-            stage.setMaximized(true);
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(recurso);
+            Parent raiz = loader.load();
+            VistaAdaptable vista = new VistaAdaptable(raiz);
+            Rectangle2D area = Screen.getPrimary().getVisualBounds();
+            double anchoReal = Math.max(1, Math.min(ancho, area.getWidth()));
+            double altoReal = Math.max(1, Math.min(alto, area.getHeight()));
+
+            if (escenaPrincipal == null) {
+                escenaPrincipal = new Scene(vista, anchoReal, altoReal);
+                URL estilos = Main.class.getResource(CSS);
+                if (estilos != null) {
+                    escenaPrincipal.getStylesheets().add(estilos.toExternalForm());
+                }
+                stagePrincipal.setScene(escenaPrincipal);
+            } else {
+                escenaPrincipal.setRoot(vista);
+            }
+            controladorVistaActual = loader.getController();
+            stagePrincipal.setTitle("KinalLlaves | " + titulo);
+            stagePrincipal.setMaximized(true);
+            stagePrincipal.show();
         } catch (Exception ex) {
-            ex.printStackTrace();
-            MensajesUI.error("No se pudo cargar la pantalla " + archivo, ex);
+            MensajesUI.error("No se pudo abrir la pantalla: " + rutaFxml
+                    + "\n" + MensajesUI.explicar(ex), ex);
         }
     }
 
-    private static void mostrarLogin() { if (Sesion.actual() != null) Sesion.cerrar(); abrir("login.fxml", "Acceso"); }
-    public static void dashboard() {
-        if (Sesion.actual() == null) { mostrarLogin(); return; }
-        switch (Sesion.actual().rol()) {
-            case "ADMIN" -> abrir("dashboard_admin.fxml", "Administración");
-            case "JEFE" -> abrir("dashboard_jefe.fxml", "Jefatura de Secretaría");
-            case "SECRETARIO" -> abrir("dashboard_secretario.fxml", "Secretaría");
-            default -> mostrarLogin();
+    public static void configurarVistaActual(Consumer<Object> configurador) {
+        if (controladorVistaActual != null && configurador != null) {
+            configurador.accept(controladorVistaActual);
         }
     }
+
+    public static Stage getStagePrincipal() {
+        return stagePrincipal;
+    }
+
+    private static String dashboardDelRol() {
+        if (Sesion.actual() == null) {
+            return "login.fxml";
+        }
+        return switch (Sesion.actual().rol()) {
+            case "ADMIN" -> "dashboard_admin.fxml";
+            case "JEFE" -> "dashboard_jefe.fxml";
+            case "SECRETARIO" -> "dashboard_secretario.fxml";
+            default -> "login.fxml";
+        };
+    }
+
+    private static void abrirLogin() {
+        if (Sesion.actual() != null) {
+            Sesion.cerrar();
+        }
+        abrir("login.fxml", "Acceso");
+    }
+
+    public static void dashboard() {
+        if (Sesion.actual() == null) {
+            abrirLogin();
+            return;
+        }
+        String archivo = dashboardDelRol();
+        abrir(archivo, "Panel principal");
+    }
+
     public static void modulo(String modulo) {
         String archivo = MODULOS.get(modulo);
-        if (archivo == null) { MensajesUI.error("Módulo desconocido: " + modulo, null); return; }
+        if (archivo == null) {
+            MensajesUI.error("Módulo desconocido: " + modulo, null);
+            return;
+        }
         abrir(archivo, modulo);
     }
 }

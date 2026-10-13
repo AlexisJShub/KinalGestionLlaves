@@ -6,9 +6,6 @@ import org.kinalllaves.dao.LlaveEstadoDAO;
 import org.kinalllaves.dao.impl.LlaveEstadoDAOImpl;
 import org.kinalllaves.util.MensajesUI;
 
-/**
- * Inventario con mantenimiento excepcional del estado de una llave.
- */
 public final class LlavesController extends CatalogoController {
 
     @FXML

@@ -12,10 +12,6 @@ import org.kinalllaves.model.Opcion;
 import org.kinalllaves.system.Main;
 import org.kinalllaves.util.*;
 
-/**
- * Base compartida para los cuatro catálogos; cada vista tiene su propio
- * controlador.
- */
 public class CatalogoController {
 
     @FXML
