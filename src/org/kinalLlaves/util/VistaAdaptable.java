@@ -5,14 +5,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.transform.Scale;
 
-/**
- * Mantiene la interfaz completa visible en un unico escenario, sin barras de
- * desplazamiento para toda la pagina. Ajusta proporcionalmente la vista a la
- * resolucion disponible, incluyendo cuando cambia el tamano de la ventana.
- *
- * Los controles, tablas y acciones conservan sus coordenadas y son
- * interactivos.
- */
 public final class VistaAdaptable extends Pane {
 
     private static final double ANCHO_DISENO = 1360;

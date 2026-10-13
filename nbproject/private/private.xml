@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Jafeth_Pérez/PROYECTO%20FINAL/KinalGestionLlaves/src/org/kinalLlaves/controller/AuditoriaController.java</file>
-            <file>file:/C:/Jafeth_Pérez/PROYECTO%20FINAL/KinalGestionLlaves/nbproject/private/private.properties</file>
+            <file>file:/C:/joaquinsanchez/ExameFinal/nuevo/KinalGestionLlaves/src/org/kinalLlaves/controller/CambiarClaveController.java</file>
+            <file>file:/C:/joaquinsanchez/ExameFinal/nuevo/KinalGestionLlaves/src/org/kinalLlaves/system/Main.java</file>
+            <file>file:/C:/joaquinsanchez/ExameFinal/nuevo/KinalGestionLlaves/src/org/kinalLlaves/util/VistaAdaptable.java</file>
+            <file>file:/C:/joaquinsanchez/ExameFinal/nuevo/KinalGestionLlaves/src/org/kinalLlaves/util/Sesion.java</file>
         </group>
     </open-files>
 </project-private>

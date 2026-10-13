@@ -16,10 +16,7 @@ import org.kinalllaves.util.Permisos;
 import org.kinalllaves.util.Sesion;
 import org.kinalllaves.util.VistaAdaptable;
 
-/**
- * Entrada y navegación principal de KinalLlaves.
- * Ejecutar esta clase en NetBeans; no se necesita una clase Lanzador.
- */
+
 public class Main extends Application {
 
     private static final String BASE_VISTAS = "/org/kinalllaves/view/";
