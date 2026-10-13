@@ -52,4 +52,8 @@ public final class Conexion {
             return c.isValid(3);
         }
     }
+
+    public Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

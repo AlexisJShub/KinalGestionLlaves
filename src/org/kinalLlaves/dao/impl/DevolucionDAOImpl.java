@@ -1,131 +1,91 @@
 package org.kinalllaves.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.kinalllaves.dao.DevolucionDAO;
 import org.kinalllaves.model.Devolucion;
 import org.kinalllaves.util.Conexion;
+import org.kinalllaves.util.Sesion;
 
-public class DevolucionDAOImpl implements DevolucionDAO {
+public final class DevolucionDAOImpl implements DevolucionDAO {
+
+    private static final String SQL_INSERTAR =
+            "INSERT INTO devoluciones(id_entrega,id_empleado_devuelve,id_usuario_recibe,fecha_devolucion) VALUES(?,?,?,?)";
+    private static final String SQL_LIBERAR_LLAVE =
+            "UPDATE llaves l JOIN entregas t ON l.id_llave=t.id_llave SET l.estado=CASE "
+          + "WHEN l.estado IN ('DANADA','EXTRAVIADA','FUERA_SERVICIO') THEN l.estado ELSE 'DISPONIBLE' END "
+          + "WHERE t.id_entrega=?";
+    private static final String SQL_SELECT =
+            "SELECT id_devolucion,id_entrega,id_empleado_devuelve,fecha_devolucion FROM devoluciones ";
 
     @Override
-    public boolean registrarDevolucion(Devolucion devolucion) {
-        boolean exito = false;
-        String sqlDev = "INSERT INTO Devolucion (id_entrega, fecha_hora_devolucion, id_empleado_devuelve, id_secretario, observaciones) VALUES (?, ?, ?, ?, ?)";
-        String sqlActualizarLlave = "UPDATE Llave l JOIN Entrega e ON l.id_llave = e.id_llave SET l.estado = 'DISPONIBLE' WHERE e.id_entrega = ?";
-
-        Connection con = null;
-        PreparedStatement psDev = null;
-        PreparedStatement psLlave = null;
-
-        try {
-            con = Conexion.getInstancia().getConexion();
-            con.setAutoCommit(false);
-
-            // 1. Insertar el registro de la devolución
-            psDev = con.prepareStatement(sqlDev);
-            psDev.setInt(1, devolucion.getIdEntrega());
-            psDev.setTimestamp(2, java.sql.Timestamp.valueOf(devolucion.getFechaHoraDevolucion()));
-            psDev.setInt(3, devolucion.getIdEmpleadoDevuelve());
-            psDev.setInt(4, devolucion.getIdSecretario());
-            psDev.setString(5, devolucion.getObservaciones());
-
-            int filasDev = psDev.executeUpdate();
-
-            // 2. Actualizar el estado de la llave a disponible
-            psLlave = con.prepareStatement(sqlActualizarLlave);
-            psLlave.setInt(1, devolucion.getIdEntrega());
-            int filasLlave = psLlave.executeUpdate();
-
-            if (filasDev > 0) {
-                con.commit();
-                exito = true;
-            } else {
-                con.rollback();
-            }
-
-        } catch (SQLException e) {
-            if (con != null) {
-                try {
-                    con.rollback();
-                } catch (SQLException ex) {
-                    System.err.println("Error en Rollback: " + ex.getMessage());
-                }
-            }
-            System.err.println("Error al registrar devolución: " + e.getMessage());
-        } finally {
+    public boolean registrarDevolucion(Devolucion devolucion) throws SQLException {
+        if (devolucion == null) {
+            throw new SQLException("La devolución no puede ser nula");
+        }
+        if (devolucion.entregaId() <= 0) {
+            throw new SQLException("La devolución debe relacionarse con una entrega");
+        }
+        if (devolucion.quienDevuelve() <= 0) {
+            throw new SQLException("Indica quién devuelve la llave");
+        }
+        if (devolucion.fecha() == null) {
+            throw new SQLException("La fecha de devolución no puede ser nula");
+        }
+        try (Connection c = Conexion.getInstancia().conectar()) {
+            c.setAutoCommit(false);
             try {
-                if (psDev != null) {
-                    psDev.close();
+                try (PreparedStatement ins = c.prepareStatement(SQL_INSERTAR)) {
+                    ins.setLong(1, devolucion.entregaId());
+                    ins.setLong(2, devolucion.quienDevuelve());
+                    ins.setLong(3, Sesion.id());
+                    ins.setTimestamp(4, Timestamp.valueOf(devolucion.fecha()));
+                    ins.executeUpdate();
                 }
-                if (psLlave != null) {
-                    psLlave.close();
+                try (PreparedStatement lib = c.prepareStatement(SQL_LIBERAR_LLAVE)) {
+                    lib.setLong(1, devolucion.entregaId());
+                    lib.executeUpdate();
                 }
-                if (con != null) {
-                    con.setAutoCommit(true);
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar recursos: " + e.getMessage());
+                c.commit();
+            } catch (SQLException ex) {
+                c.rollback();
+                throw ex;
             }
         }
-
-        return exito;
+        return true;
     }
 
     @Override
-    public Devolucion obtenerPorIdEntrega(int idEntrega) {
-        String sql = "SELECT * FROM Devolucion WHERE id_entrega = ?";
-        Devolucion devolucion = null;
-
-        try (Connection con = Conexion.getInstancia().getConexion(); 
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, idEntrega);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    devolucion = new Devolucion();
-                    devolucion.setIdDevolucion(rs.getInt("id_devolucion"));
-                    devolucion.setIdEntrega(rs.getInt("id_entrega"));
-                    devolucion.setFechaHoraDevolucion(rs.getTimestamp("fecha_hora_devolucion").toLocalDateTime());
-                    devolucion.setIdEmpleadoDevuelve(rs.getInt("id_empleado_devuelve"));
-                    devolucion.setIdSecretario(rs.getInt("id_secretario"));
-                    devolucion.setObservaciones(rs.getString("observaciones"));
-                }
+    public Devolucion obtenerPorIdEntrega(long idEntrega) throws SQLException {
+        try (Connection c = Conexion.getInstancia().conectar();
+             PreparedStatement p = c.prepareStatement(SQL_SELECT + "WHERE id_entrega=?")) {
+            p.setLong(1, idEntrega);
+            try (ResultSet r = p.executeQuery()) {
+                return r.next() ? mapear(r) : null;
             }
-        } catch (SQLException e) {
-            System.err.println("Error al obtener devolución: " + e.getMessage());
         }
-
-        return devolucion;
     }
 
     @Override
-    public List<Devolucion> listarDevoluciones() {
-        String sql = "SELECT * FROM Devolucion ORDER BY fecha_hora_devolucion DESC";
+    public List<Devolucion> listarDevoluciones() throws SQLException {
         List<Devolucion> lista = new ArrayList<>();
-
-        try (Connection con = Conexion.getInstancia().getConexion(); 
-             PreparedStatement ps = con.prepareStatement(sql); 
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                Devolucion dev = new Devolucion();
-                dev.setIdDevolucion(rs.getInt("id_devolucion"));
-                dev.setIdEntrega(rs.getInt("id_entrega"));
-                dev.setFechaHoraDevolucion(rs.getTimestamp("fecha_hora_devolucion").toLocalDateTime());
-                dev.setIdEmpleadoDevuelve(rs.getInt("id_empleado_devuelve"));
-                dev.setIdSecretario(rs.getInt("id_secretario"));
-                dev.setObservaciones(rs.getString("observaciones"));
-                lista.add(dev);
+        try (Connection c = Conexion.getInstancia().conectar();
+             PreparedStatement p = c.prepareStatement(SQL_SELECT + "ORDER BY fecha_devolucion DESC LIMIT 350");
+             ResultSet r = p.executeQuery()) {
+            while (r.next()) {
+                lista.add(mapear(r));
             }
-        } catch (SQLException e) {
-            System.err.println("Error al listar devoluciones: " + e.getMessage());
         }
-
         return lista;
+    }
+
+    private Devolucion mapear(ResultSet r) throws SQLException {
+        Timestamp fecha = r.getTimestamp("fecha_devolucion");
+        return new Devolucion(
+                r.getLong("id_devolucion"),
+                r.getLong("id_entrega"),
+                r.getLong("id_empleado_devuelve"),
+                fecha == null ? null : fecha.toLocalDateTime());
     }
 }
