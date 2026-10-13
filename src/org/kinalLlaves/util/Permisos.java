@@ -1,9 +1,7 @@
-package org.kinalLlaves.util;
+package org.kinalllaves.util;
 
 public final class Permisos {
-
-    private Permisos() {
-    }
+    private Permisos() {}
 
     public static boolean puede(String modulo) {
         return Sesion.actual() != null

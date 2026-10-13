@@ -1,4 +1,4 @@
-package org.kinalLlaves.util;
+package org.kinalllaves.util;
 
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -28,8 +28,6 @@ public final class VistaAdaptable extends Pane {
         double anchoVentana = Math.max(1, getWidth());
         double altoVentana = Math.max(1, getHeight());
 
-        // El alto preferido puede cambiar al leer un carne y pasar del estado
-        // de espera al resumen, o al construir el formulario desde el DAO.
         double altoRequerido = contenido.prefHeight(ANCHO_DISENO);
         if (!Double.isFinite(altoRequerido) || altoRequerido < 1) {
             altoRequerido = ALTO_BASE;
