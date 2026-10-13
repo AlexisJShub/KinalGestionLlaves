@@ -7,10 +7,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Label;
 import java.util.*;
 
-/**
- * Utilidad visual: preserva columnas incluso cuando un filtro devuelve cero
- * filas.
- */
 public final class Tablas {
 
     private Tablas() {
