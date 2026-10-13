@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -16,8 +15,7 @@ import org.kinalllaves.util.Permisos;
 import org.kinalllaves.util.Sesion;
 import org.kinalllaves.util.VistaAdaptable;
 
-
-public class Main extends Application {
+public final class Main {
 
     private static final String BASE_VISTAS = "/org/kinalllaves/view/";
     private static final String CSS = BASE_VISTAS + "style/app.css";
@@ -42,12 +40,21 @@ public class Main extends Application {
     private static Scene escenaPrincipal;
     private static Object controladorVistaActual;
 
+    private Main() { }
+
     public static void main(String[] args) {
-        launch(args);
+
+        Application.launch(FxApplication.class, args);
     }
 
-    @Override
-    public void start(Stage stage) {
+    public static class FxApplication extends Application {
+        @Override
+        public void start(Stage stage) {
+            Main.iniciar(stage);
+        }
+    }
+
+    private static void iniciar(Stage stage) {
         stagePrincipal = stage;
         stage.setResizable(true);
         Rectangle2D area = Screen.getPrimary().getVisualBounds();
@@ -57,19 +64,10 @@ public class Main extends Application {
         stage.setMaximized(true);
     }
 
-    /**
-     * Entrada de navegación utilizada por los controladores del proyecto.
-     * Se conserva por compatibilidad con sus acciones FXML.
-     */
     public static void abrir(String archivoFxml, String titulo) {
         cambiarVista(archivoFxml, titulo, 1360, 830);
     }
 
-    /**
-     * Carga una vista en la MISMA ventana, sin recrear el Stage.
-     * Admite tanto rutas completas como nombres de archivos del directorio view.
-     * Se mantiene la comprobación de sesión, rol y permisos.
-     */
     public static void cambiarVista(String rutaFxml, String titulo, double ancho, double alto) {
         if (stagePrincipal == null) {
             throw new IllegalStateException("La aplicación aún no ha iniciado");
