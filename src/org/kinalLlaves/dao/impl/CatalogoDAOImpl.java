@@ -3,15 +3,15 @@ package org.kinalllaves.dao.impl;
 import org.kinalllaves.dao.CatalogoDAO;
 import java.sql.*;
 import java.util.*;
+import static org.kinalllaves.dao.CatalogoDAO.MODULOS;
 import org.kinalllaves.util.*;
 import org.kinalllaves.model.Opcion;
-
 
 public class CatalogoDAOImpl implements CatalogoDAO {
 
     public List<Map<String, Object>> listar(String modulo, String filtro) throws SQLException {
         Permisos.exigir(modulo);
-        Def d = MODULOS.get(modulo);
+        CatalogoDAO.Def d = MODULOS.get(modulo);
         if (d == null) {
             throw new IllegalArgumentException("Módulo no reconocido");
         }
@@ -34,12 +34,12 @@ public class CatalogoDAOImpl implements CatalogoDAO {
 
     public void guardar(String modulo, long id, Map<String, String> datos) throws SQLException {
         Permisos.exigir(modulo);
-        Def d = MODULOS.get(modulo);
+        CatalogoDAO.Def d = MODULOS.get(modulo);
         if (d == null) {
             throw new SQLException("Catálogo inválido");
         }
         if (modulo.equals("USUARIOS") && id > 0 && id == Sesion.id()) {
-            
+            // Protección del rol actual; permite actualizar el nombre sin cerrar la sesión.
             try (Connection c = Conexion.getInstancia().conectar(); PreparedStatement query = c.prepareStatement("SELECT id_rol FROM usuarios WHERE id_usuario=?")) {
                 query.setLong(1, id);
                 try (ResultSet r = query.executeQuery()) {
@@ -231,7 +231,7 @@ public class CatalogoDAOImpl implements CatalogoDAO {
             throw new SQLException("El motivo debe tener máximo 500 caracteres.");
         }
         Permisos.exigir(modulo);
-        Def d = MODULOS.get(modulo);
+        CatalogoDAO.Def d = MODULOS.get(modulo);
         if (d == null) {
             throw new SQLException("Módulo inválido");
         }

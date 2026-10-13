@@ -1,4 +1,4 @@
-package org.kinalllaves.util;
+package org.kinalLlaves.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,6 @@ import javafx.scene.control.TextInputDialog;
 /**
  * Solicita el carné al operador o al empleado antes de acciones delicadas.
  */
-
 public final class CarnetConfirmacion {
 
     private CarnetConfirmacion() {

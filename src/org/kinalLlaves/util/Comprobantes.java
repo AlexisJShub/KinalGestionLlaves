@@ -1,4 +1,4 @@
-package org.kinalllaves.util;
+package org.kinalLlaves.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

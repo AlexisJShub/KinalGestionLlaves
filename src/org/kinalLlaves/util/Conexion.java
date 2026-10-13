@@ -1,10 +1,14 @@
-package org.kinalllaves.util;
+package org.kinalLlaves.util;
 
 import java.io.*;
 import java.nio.file.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Conexiones independientes por transacción; nunca expone claves ni las
+ * codifica en Java.
+ */
 public final class Conexion {
 
     private static Conexion instancia;
@@ -25,7 +29,6 @@ public final class Conexion {
         url = requerir(p, "db.url");
         user = requerir(p, "db.user");
         password = requerir(p, "db.password");
-
     }
 
     private static String requerir(Properties p, String k) {
@@ -51,9 +54,5 @@ public final class Conexion {
         try (Connection c = conectar()) {
             return c.isValid(3);
         }
-    }
-
-    public Connection getConexion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

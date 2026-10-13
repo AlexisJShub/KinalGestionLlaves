@@ -1,4 +1,4 @@
-package org.kinalllaves.util;
+package org.kinalLlaves.util;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -6,6 +6,10 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.zip.*;
 
+/**
+ * Exportación simple de informes sin software externo; PDF A4 y XLSX OOXML con
+ * valores de texto.
+ */
 public final class Exportaciones {
 
     private Exportaciones() {
